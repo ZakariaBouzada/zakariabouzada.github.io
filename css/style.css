@@ -40,7 +40,7 @@ header {
     object-fit: cover;
     box-shadow: 0 4px 12px rgba(0,0,0,0.25);
     border: 2px solid #fff;
-    flex-shrink: 0;
+    flex-shrink: 1;
 }
 
 .header-text h1 {
