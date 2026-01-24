@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Automated Medallion Data Pipeline</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>Automated Medallion Data Pipeline</h1>
+    <p>Academic Data Engineering Project (Microsoft Databricks)</p>
+    <nav>
+        <a href="../index.html">← Back to Home</a>
+    </nav>
+</header>
+
+<main>
+
+    <section>
+        <h2>Project Overview</h2>
+        <p>
+            This project involved designing and implementing an automated data pipeline
+            following the medallion architecture on Microsoft Databricks. The goal was to
+            ingest and process NBA player statistics in near real time and produce
+            structured analytical datasets for performance analysis.
+        </p>
+    </section>
+
+    <section>
+        <h2>Architecture</h2>
+        <p>
+            The pipeline follows the medallion architecture pattern, consisting of Bronze,
+            Silver, and Gold layers. Raw NBA statistics are ingested into the Bronze layer,
+            cleaned and structured in the Silver layer, and aggregated into analytics-ready
+            datasets in the Gold layer.
+        </p>
+
+        <img src="../assets/images/medallion_architecture.png"
+             alt="Medallion architecture diagram"
+             style="max-width:100%; margin-top:1rem;">
+    </section>
+
+    <section>
+        <h2>Technologies Used</h2>
+        <ul>
+            <li>Microsoft Databricks</li>
+            <li>Python (data ingestion and transformation)</li>
+            <li>SQL (data modeling and aggregations)</li>
+            <li>Delta Lake</li>
+            <li>Power BI (data visualization)</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>My Role and Contributions</h2>
+        <p>
+            I was responsible for designing the pipeline architecture, implementing data
+            transformations using Python and SQL, and configuring automated jobs within
+            Databricks. Particular emphasis was placed on data quality, scalability, and
+            clear separation of pipeline layers.
+        </p>
+    </section>
+
+    <section>
+        <h2>Results and Visualization</h2>
+        <p>
+            The final Gold-layer datasets categorized NBA players based on scoring and assist
+            performance. These datasets were used to build interactive dashboards in Power BI,
+            enabling comparative analysis and trend exploration.
+        </p>
+
+        <img src="../assets/images/powerbi_dashboard.png"
+             alt="Power BI dashboard example"
+             style="max-width:100%; margin-top:1rem;">
+    </section>
+
+    <section>
+        <h2>Academic Note</h2>
+        <p>
+            Due to academic ownership and infrastructure restrictions, the source code and
+            Databricks workspace for this project are private. This page documents the system
+            design, methodology, and outcomes of the project.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    <p>© 2026 Zakaria Bouzada</p>
+</footer>
+
+</body>
+</html>
