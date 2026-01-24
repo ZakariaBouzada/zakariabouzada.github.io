@@ -1,36 +1,262 @@
+:root {
+    --primary-color: #0066cc;
+    --secondary-color: #00a99d;
+    --background-color: #fafafa;
+    --card-background: #ffffff;
+    --border-color: #e5e7eb;
+    --text-color: #222;
+}
+
+/* Base */
 body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     margin: 0;
     line-height: 1.6;
-    color: #222;
+    color: var(--text-color);
+    background-color: var(--background-color);
 }
 
+/* Header */
 header {
     background: #f5f5f5;
-    padding: 2rem;
-    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.header-content-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.profile-pic {
+    width: 150px;
+    height: 200px;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    border: 2px solid #fff;
+}
+
+.header-text h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.header-text h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: #555;
+}
+
+/* Nav */
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
 }
 
 nav a {
-    margin: 0 0.75rem;
     text-decoration: none;
-    color: #007acc;
+    color: var(--primary-color);
+    font-weight: 500;
 }
 
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Main */
 main {
     max-width: 900px;
     margin: 2rem auto;
     padding: 0 1rem;
 }
 
-.project {
-    border-left: 4px solid #007acc;
-    padding-left: 1rem;
-    margin-bottom: 1.5rem;
+/* Project card */
+.project-card {
+    background: var(--card-background);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+.project-link {
+    display: inline-block;
+    margin-top: 0.75rem;
+    text-decoration: none;
+    color: #fff;
+    background-color: var(--primary-color);
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+}
+
+.project-link:hover {
+    background-color: #005a99;
+}
+
+/* About section */
+.about-section {
+    background-color: #f0f4f8;
+    padding: 2rem;
+    border-radius: 14px;
+    margin-bottom: 3rem;
+}
+
+.about-section h3 {
+    margin-top: 2rem;
+    color: var(--primary-color);
+}
+
+/* Skills */
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.skill-category h4 {
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.skill-badge {
+    display: inline-block;
+    background-color: #e0f2fe;
+    color: #075985;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 999px;
+    margin: 0.2rem 0.2rem 0 0;
+    border: 1px solid #bae6fd;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.skill-badge:hover {
+    transform: translateY(-2px);
+    background-color: #bae6fd;
+}
+
+/* ============================= */
+/* STACK SECTION (POLISHED) */
+/* ============================= */
+
+.stack-section {
+    margin: 4rem 0;
+    padding: 3rem 2rem;
+    background: #f8fafc;
+    border-radius: 18px;
+}
+
+.stack-title {
+    margin: 0;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.stack-subtitle {
+    text-align: center;
+    color: #555;
+    margin-top: 0.5rem;
+    margin-bottom: 3rem;
+}
+
+/* FORCE 2x2 grid on desktop */
+.stack-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+/* Stack cards */
+.stack-card {
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.75rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.stack-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+}
+
+.stack-card h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: #111;
+}
+
+.stack-card p {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* Stack tags */
+.stack-tags {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.stack-tags span {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.65rem;
+    border-radius: 999px;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    color: #1f2937;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.stack-tags span:hover {
+    transform: translateY(-2px);
+    background: #e0f2fe;
+    border-color: #bae6fd;
+}
+
+/* Contact */
+.contact-section a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.contact-section a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
 footer {
     text-align: center;
     padding: 2rem;
     color: #777;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .stack-grid {
+        grid-template-columns: 1fr;
+    }
 }

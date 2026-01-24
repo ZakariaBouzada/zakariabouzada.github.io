@@ -8,32 +8,26 @@
 </head>
 <body>
 
-<header>
-    <h1>Zakaria Bouzada</h1>
-    <p>Computer Engineer | MSc Student</p>
+<header class="site-header">
+    <div class="header-content-wrapper">
+        <div class="header-content">
+            <img src="assets/images/profiilikuva2.jpeg" alt="Zakaria Bouzada" class="profile-pic">
+            <div class="header-text">
+                <h1>Zakaria Bouzada</h1>
+                <h2>Computer Engineer | BSc Graduate | MSc Student</h2>
+            </div>
+        </div>
+    </div>
     <nav>
-        <a href="#projects">Projects</a>
         <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#stack">Stacks</a>
         <a href="#contact">Contact</a>
     </nav>
 </header>
 
 <main>
-    <section id="projects">
-        <h2>Projects</h2>
-
-        <div class="project">
-            <h3>Automated Medallion Data Pipeline (Academic Project)</h3>
-            <p>Designed and implemented an automated data pipeline following the medallion architecture on Microsoft Databricks. The pipeline ingests NBA player statistics, performs structured transformations using Python and SQL, and produces analytical datasets categorizing players by scoring and assists. The project emphasized scalable data processing, data quality, and automation. Results were visualized using Power BI.
-
-                Note: Source code and infrastructure are private due to academic ownership.</p>
-            <a href="projects/databricks-pipeline.html">View case study</a>
-        </div>
-
-        <!-- Add more projects here -->
-    </section>
-
-    <section id="about">
+    <section id="about" class="about-section">
         <h2>About Me</h2>
         <p>
             I am a Computer Engineering graduate and current Master’s student at Åbo Akademi University, with a focus on AI and
@@ -43,13 +37,83 @@
             opportunities in automation, cloud infrastructure, data engineering, or software engineering.
         </p>
     </section>
+    <section id="projects">
+        <h2>Projects</h2>
 
-    <section id="contact">
+        <div class="project-card">
+            <h3>Automated Medallion Data Pipeline (Academic Project)</h3>
+            <p>Designed and implemented an automated data pipeline following the medallion architecture on Microsoft Databricks. The pipeline ingests NBA player statistics, performs structured transformations using Python and SQL, and produces analytical datasets categorizing players by scoring and assists. The project emphasized scalable data processing, data quality, and automation. Results were visualized using Power BI.</p>
+            <p><em>Note: Source code and infrastructure are private due to academic ownership.</em></p>
+            <a href="projects/databricks-pipeline.html" class="project-link">View case study</a>
+        </div>
+
+        <!-- Additional project cards go here -->
+    </section>
+
+    <section id="stack" class="stack-section">
+        <h2 class="stack-title">My Stack</h2>
+        <p class="stack-subtitle">
+            Tools and technologies I use most — and what I like building with them.
+        </p>
+
+        <div class="stack-grid">
+
+            <div class="stack-card">
+                <h3>Backend & APIs</h3>
+                <p>Scalable services, clean data models, automation.</p>
+                <div class="stack-tags">
+                    <span>Python</span>
+                    <span>Java</span>
+                    <span>C</span>
+                    <span>Django</span>
+                    <span>REST APIs</span>
+                </div>
+            </div>
+
+            <div class="stack-card">
+                <h3>Data & Analytics</h3>
+                <p>Pipelines, analytics, and large-scale data processing.</p>
+                <div class="stack-tags">
+                    <span>SQL</span>
+                    <span>PowerBI</span>
+                    <span>Data Pipelines</span>
+                    <span>Data Lakes</span>
+                    <span>Machine Learning</span>
+                </div>
+            </div>
+
+            <div class="stack-card">
+                <h3>Frontend & UX</h3>
+                <p>Interactive interfaces and clean presentation.</p>
+                <div class="stack-tags">
+                    <span>JavaScript</span>
+                    <span>React</span>
+                    <span>HTML</span>
+                    <span>CSS</span>
+                </div>
+            </div>
+
+            <div class="stack-card">
+                <h3>Cloud & DevOps</h3>
+                <p>Infrastructure, automation, and deployment.</p>
+                <div class="stack-tags">
+                    <span>Microsoft Azure</span>
+                    <span>AWS</span>
+                    <span>Docker</span>
+                    <span>CI/CD</span>
+                    <span>Git & GitHub</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
         <h2>Contact</h2>
         <p>
-            Email: zakaria.bouzada1@gmail.com<br>
+            Email: <a href="mailto:zakaria.bouzada1@gmail.com">zakaria.bouzada1@gmail.com</a><br>
             Number: +358 44 205 9970 <br>
-            GitHub: <a href="https://github.com/zakariabouzada">Zakaria Bouzada</a>
+            GitHub: <a href="https://github.com/zakariabouzada">Zakaria Bouzada</a><br>
             LinkedIn: <a href="https://www.linkedin.com/in/zakaria-bouzada-54588622b/">Zakaria Bouzada</a>
         </p>
     </section>
@@ -62,4 +126,3 @@
 <script src="js/main.js"></script>
 </body>
 </html>
-
