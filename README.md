@@ -1,1 +1,1 @@
-My website for project mainly
+My website for projects mainly
