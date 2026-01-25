@@ -260,3 +260,12 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+.dataset-links a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.dataset-links a:hover {
+    text-decoration: underline;
+}
