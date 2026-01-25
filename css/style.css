@@ -22,7 +22,7 @@ body {
 /* Header */
 /* ========================= */
 header {
-    background: #f5f5f5;
+    background: rgba(30, 31, 34, 0.63);
     padding: 2rem 1rem;
 }
 
@@ -62,28 +62,41 @@ header {
     margin: 0;
     font-size: 1.2rem;
     font-weight: normal;
-    color: #555;
+    color: #1e1f22;
 }
 
 /* ========================= */
 /* Navigation */
 /* ========================= */
+/* Nav */
 nav {
     display: flex;
     justify-content: center;
-    gap: 1.5rem;
-    margin-top: 1rem;
+    gap: 1rem;
+    margin-top: 1.5rem;
 }
 
+/* Pill-style nav links */
 nav a {
     text-decoration: none;
     color: var(--primary-color);
     font-weight: 500;
-    position: relative;
+    padding: 0.45rem 1rem;
+    border-radius: 999px; /* makes it oval */
+    border: 1px solid var(--border-color);
+    background-color: #ffffff;
+    transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease,
+            background-color 0.2s ease;
 }
 
+/* Hover pop effect */
 nav a:hover {
-    text-decoration: underline;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 102, 204, 0.25);
 }
 
 /* ========================= */
