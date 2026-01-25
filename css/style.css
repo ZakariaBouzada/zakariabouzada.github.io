@@ -7,7 +7,9 @@
     --text-color: #222;
 }
 
+/* ========================= */
 /* Base */
+/* ========================= */
 body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     margin: 0;
@@ -16,7 +18,9 @@ body {
     background-color: var(--background-color);
 }
 
+/* ========================= */
 /* Header */
+/* ========================= */
 header {
     background: #f5f5f5;
     padding: 2rem 1rem;
@@ -30,18 +34,25 @@ header {
 .header-content {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.25rem;
 }
 
+/* Profile picture */
 .profile-pic {
     width: 185px;
     height: 250px;
     border-radius: 20px;
     object-fit: cover;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
     border: 2px solid #fff;
+    transition: transform 0.25s ease;
 }
 
+.profile-pic:hover {
+    transform: scale(1.03);
+}
+
+/* Header text */
 .header-text h1 {
     margin: 0;
     font-size: 1.8rem;
@@ -54,7 +65,9 @@ header {
     color: #555;
 }
 
-/* Nav */
+/* ========================= */
+/* Navigation */
+/* ========================= */
 nav {
     display: flex;
     justify-content: center;
@@ -66,20 +79,69 @@ nav a {
     text-decoration: none;
     color: var(--primary-color);
     font-weight: 500;
+    position: relative;
 }
 
 nav a:hover {
     text-decoration: underline;
 }
 
+/* ========================= */
 /* Main */
+/* ========================= */
 main {
     max-width: 900px;
-    margin: 2rem auto;
+    margin: 2.5rem auto;
     padding: 0 1rem;
 }
 
-/* Project card */
+/* ========================= */
+/* Section cards (project pages) */
+/* ========================= */
+main section {
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 2.75rem;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.04);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+main section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+/* ========================= */
+/* Headings */
+/* ========================= */
+main h2 {
+    font-size: 1.7rem;
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    color: #0f172a;
+    position: relative;
+}
+
+main h2::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--primary-color);
+    border-radius: 2px;
+    margin-top: 0.4rem;
+}
+
+main p {
+    font-size: 1.02rem;
+    color: #374151;
+}
+
+/* ========================= */
+/* Project card (homepage) */
+/* ========================= */
 .project-card {
     background: var(--card-background);
     border-radius: 12px;
@@ -87,12 +149,12 @@ main {
     margin-bottom: 2rem;
     box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     border: 1px solid var(--border-color);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .project-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.08);
 }
 
 .project-link {
@@ -101,7 +163,7 @@ main {
     text-decoration: none;
     color: #fff;
     background-color: var(--primary-color);
-    padding: 0.4rem 0.9rem;
+    padding: 0.45rem 1rem;
     border-radius: 6px;
 }
 
@@ -109,11 +171,13 @@ main {
     background-color: #005a99;
 }
 
+/* ========================= */
 /* About section */
+/* ========================= */
 .about-section {
     background-color: #f0f4f8;
-    padding: 2rem;
-    border-radius: 14px;
+    padding: 2.25rem;
+    border-radius: 18px;
     margin-bottom: 3rem;
 }
 
@@ -122,7 +186,9 @@ main {
     color: var(--primary-color);
 }
 
+/* ========================= */
 /* Skills */
+/* ========================= */
 .skills-container {
     display: flex;
     flex-wrap: wrap;
@@ -152,15 +218,14 @@ main {
     background-color: #bae6fd;
 }
 
-/* ============================= */
-/* STACK SECTION (POLISHED) */
-/* ============================= */
-
+/* ========================= */
+/* Stack Section */
+/* ========================= */
 .stack-section {
     margin: 4rem 0;
     padding: 3rem 2rem;
     background: #f8fafc;
-    border-radius: 18px;
+    border-radius: 20px;
 }
 
 .stack-title {
@@ -176,39 +241,25 @@ main {
     margin-bottom: 3rem;
 }
 
-/* FORCE 2x2 grid on desktop */
 .stack-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
 }
 
-/* Stack cards */
 .stack-card {
     background: var(--card-background);
     border: 1px solid var(--border-color);
-    border-radius: 16px;
+    border-radius: 18px;
     padding: 1.75rem;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .stack-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.08);
 }
 
-.stack-card h3 {
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-    color: #111;
-}
-
-.stack-card p {
-    font-size: 0.95rem;
-    color: #555;
-}
-
-/* Stack tags */
 .stack-tags {
     margin-top: 1rem;
     display: flex;
@@ -223,33 +274,62 @@ main {
     background: #f1f5f9;
     border: 1px solid #e2e8f0;
     color: #1f2937;
-    transition: transform 0.2s ease, background 0.2s ease;
 }
 
-.stack-tags span:hover {
-    transform: translateY(-2px);
-    background: #e0f2fe;
-    border-color: #bae6fd;
+/* ========================= */
+/* Images & Diagrams */
+/* ========================= */
+main img {
+    display: block;
+    margin: 1.75rem auto;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    max-width: 100%;
 }
 
-/* Contact */
-.contact-section a {
+main img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.2);
+}
+
+/* ========================= */
+/* Code / File paths */
+/* ========================= */
+code {
+    background: #f1f5f9;
+    padding: 0.2rem 0.45rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: #0f172a;
+    border: 1px solid #e2e8f0;
+}
+
+/* ========================= */
+/* Links inside content */
+/* ========================= */
+main a {
     color: var(--primary-color);
+    font-weight: 500;
     text-decoration: none;
 }
 
-.contact-section a:hover {
+main a:hover {
     text-decoration: underline;
 }
 
+/* ========================= */
 /* Footer */
+/* ========================= */
 footer {
     text-align: center;
-    padding: 2rem;
+    padding: 2.5rem;
     color: #777;
 }
 
+/* ========================= */
 /* Responsive */
+/* ========================= */
 @media (max-width: 768px) {
     .header-content {
         flex-direction: column;
@@ -260,6 +340,8 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+/* Dataset links */
 .dataset-links a {
     color: var(--primary-color);
     text-decoration: none;
@@ -268,4 +350,9 @@ footer {
 
 .dataset-links a:hover {
     text-decoration: underline;
+}
+/* Center underline only for Stack title */
+.stack-title::after {
+    margin-left: auto;
+    margin-right: auto;
 }
