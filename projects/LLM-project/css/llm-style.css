@@ -1,0 +1,68 @@
+.llm-chat-section {
+    max-width: 700px;
+    margin: 2rem auto;
+    background: #f8fafc;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#chat-box {
+    height: 400px;
+    overflow-y: auto;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1rem;
+    background-color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.chat-msg {
+    padding: 0.5rem 0.75rem;
+    margin: 0.5rem 0;
+    border-radius: 12px;
+    max-width: 80%;
+}
+
+.chat-msg.user {
+    background-color: #0066cc;
+    color: #fff;
+    align-self: flex-end;
+}
+
+.chat-msg.ai {
+    background-color: #e5f3ff;
+    color: #111;
+    align-self: flex-start;
+}
+
+.chat-input {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+}
+
+.chat-input button {
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    border: none;
+    background-color: #0066cc;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.chat-input button:hover {
+    background-color: #0055a3;
+}

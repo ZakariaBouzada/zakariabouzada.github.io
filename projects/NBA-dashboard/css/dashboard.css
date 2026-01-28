@@ -1,0 +1,88 @@
+/* =======================
+   NBA Dashboard CSS
+======================= */
+
+/* General */
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    margin: 0;
+    padding: 2rem;
+    background-color: #fafafa;
+    color: #222;
+}
+
+h1 {
+    text-align: center;
+    color: #0066cc;
+    margin-bottom: 0.2rem;
+}
+
+.subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+/* KPI cards grid */
+.kpi-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+}
+
+.kpi-card {
+    background-color: #fff;
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+    min-width: 150px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kpi-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.kpi-card h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    color: #0066cc;
+}
+
+.kpi-card p {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Charts */
+canvas {
+    max-width: 1200px;   /* bigger width */
+    height: 500px;       /* specify height so charts are easier to read */
+    margin: 2rem auto 4rem auto;
+    display: block;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+h2 {
+    font-size: 1.3rem;
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .kpi-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+}

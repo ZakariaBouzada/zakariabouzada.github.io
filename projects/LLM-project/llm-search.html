@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LLM Search | Zakaria Bouzada</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/../css/style.css">
+    <link rel="stylesheet" href="/LLM-project/css/llm-style.css">
+</head>
+<body>
+
+<header class="site-header">
+    <h1 style="text-align:center;">AI Search Demo</h1>
+    <p style="text-align:center;">Ask the AI anything (powered by Hugging Face LLM)</p>
+</header>
+
+<main>
+    <section class="llm-chat-section">
+        <div class="chat-container">
+            <div id="chat-box">
+                <!-- Chat messages appear here -->
+            </div>
+            <div class="chat-input">
+                <label for="llm-question">Search the site:</label>
+
+                <input type="text" id="llm-question" placeholder="Type your question..." />
+
+                <button onclick="askLLM()">Ask AI</button>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script src="/LLM-project/js/llm-main.js"></script>
+</body>
+</html>
