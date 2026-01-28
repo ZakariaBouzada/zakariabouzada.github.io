@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Automated Medallion Data Pipeline</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>Automated Medallion Data Pipeline</h1>
+    <p>Academic Data Engineering Project · Microsoft Databricks</p>
+    <nav>
+        <a href="../../index.html">← Back to Home</a>
+    </nav>
+</header>
+
+<main>
+
+    <!-- ===================== -->
+    <!-- PROJECT OVERVIEW -->
+    <!-- ===================== -->
+    <section>
+        <h2>Project Overview</h2>
+        <p>
+            This project implements a fully automated, end-to-end data pipeline for analyzing
+            NBA player performance. Built on Microsoft Databricks using Apache Spark, the pipeline
+            follows the <strong>medallion architecture</strong> (Bronze, Silver, Gold) and produces
+            analytics-ready datasets that power interactive Power BI dashboards.
+        </p>
+
+        <p>
+            The focus of the project was on scalable data processing, data quality, automation,
+            and clear separation of responsibilities across pipeline layers.
+        </p>
+    </section>
+
+    <!-- ===================== -->
+    <!-- ARCHITECTURE -->
+    <!-- ===================== -->
+    <section>
+        <h2>Pipeline Architecture</h2>
+        <p>
+            The system follows a layered medallion architecture, where raw data is incrementally
+            refined into high-quality analytical datasets.
+        </p>
+
+        <!-- IMAGE: architecture diagram -->
+        <!-- File location suggestion:
+             /assets/images/medallion_architecture.png -->
+        <img src="../../projects/databricks-pipeline/images/medallion_architecture.png"
+             alt="Medallion architecture diagram"
+             style="max-width:100%; margin-top:1rem;">
+    </section>
+
+    <!-- ===================== -->
+    <!-- PIPELINE LAYERS -->
+    <!-- ===================== -->
+    <section>
+        <h2>Pipeline Layers</h2>
+
+        <h3>Bronze Layer – Data Ingestion</h3>
+        <p>
+            Raw NBA statistics are automatically downloaded from Kaggle using the Kaggle API
+            and ingested into Databricks as Spark DataFrames. The Bronze layer preserves the
+            original structure of the source data to allow traceability and reprocessing.
+        </p>
+
+        <h3>Silver Layer – Data Cleaning & Transformation</h3>
+        <p>
+            The Silver layer cleans and standardizes the raw data by removing duplicates,
+            handling null values, normalizing team and player identifiers, and casting columns
+            into appropriate numeric types. Additional metadata, such as transformation timestamps,
+            is added to support data lineage.
+        </p>
+
+        <h3>Gold Layer – Analytics & Aggregation</h3>
+        <p>
+            In the Gold layer, cleaned data is aggregated into analytical tables. Key metrics
+            such as points per game (PPG), assists per game (APG), rebounds per game (RPG),
+            double-doubles, and triple-doubles are calculated. These datasets are optimized
+            for downstream analytics and BI consumption.
+        </p>
+    </section>
+
+    <!-- ===================== -->
+    <!-- ENGINEERING DECISIONS -->
+    <!-- ===================== -->
+    <section>
+        <h2>Design Decisions & Engineering Considerations</h2>
+        <ul>
+            <li>Apache Spark was chosen for scalable processing and future extensibility.</li>
+            <li>Medallion architecture enables data quality enforcement and clear data lineage.</li>
+            <li>Aggregations are isolated in the Gold layer to avoid recomputation.</li>
+            <li>Batch processing was selected over streaming due to dataset characteristics.</li>
+            <li>Delta tables enable reliable Power BI integration.</li>
+        </ul>
+    </section>
+
+    <!-- ===================== -->
+    <!-- DATA QUALITY -->
+    <!-- ===================== -->
+    <section>
+        <h2>Data Quality & Validation</h2>
+        <p>
+            Multiple data quality checks were implemented throughout the pipeline to ensure
+            reliable analytical results:
+        </p>
+        <ul>
+            <li>Deduplication of player records</li>
+            <li>Safe casting of numeric fields</li>
+            <li>Filtering of invalid or incomplete rows</li>
+            <li>Row count logging at each pipeline stage</li>
+        </ul>
+    </section>
+
+    <!-- ===================== -->
+    <!-- RESULTS & VISUALS -->
+    <!-- ===================== -->
+    <section>
+        <h2>Results & Visualizations</h2>
+        <p>
+            The Gold datasets enable analysis of top performers, trends across seasons,
+            and advanced performance metrics. Sample outputs from the pipeline are shown below.
+        </p>
+        <!-- Embedded NBA Dashboard -->
+        <div class="nba-dashboard-container">
+            <iframe src="../NBA-dashboard/nba-dashboard.html" title="NBA Dashboard" frameborder="0"></iframe>
+        </div>
+
+        <p style="text-align:center; margin-top:1rem;">
+            <a href="../NBA-dashboard/nba-dashboard.html" target="_blank" class="btn">Open Full NBA Dashboard</a>
+        </p>
+
+        <!-- IMAGE: top players by average points -->
+        <!-- /projects/images/top10_avg_points.png -->
+        <img src="/databricks-pipeline/images/top10_avg_points.png"
+             alt="Top 10 players by average points"
+             style="max-width:100%; margin-top:1rem;">
+
+        <!-- IMAGE: triple / double doubles -->
+        <!-- /projects/images/top10_triple_doubles.png -->
+        <img src="/databricks-pipeline/images/top10_triple_doubles.png"
+             alt="Top 10 players by triple doubles"
+             style="max-width:100%; margin-top:1rem;">
+    </section>
+
+    <!-- ===================== -->
+    <!-- POWER BI -->
+    <!-- ===================== -->
+    <section>
+        <h2>Power BI Dashboard</h2>
+        <p>
+            The final Gold-layer tables are persisted as Delta tables and connected directly
+            to Power BI, enabling interactive dashboards and real-time analytical exploration.
+        </p>
+
+        <!-- IMAGE: Power BI screenshot -->
+        <!-- /projects/images/powerbi_dashboard.png -->
+        <img src="/databricks-pipeline/images/image.png"
+             alt="Power BI dashboard"
+             style="max-width:100%; margin-top:1rem;">
+    </section>
+
+    <!-- ===================== -->
+    <!-- DATA OUTPUTS -->
+    <!-- ===================== -->
+    <section>
+        <h2>Data Outputs</h2>
+        <p>
+            The pipeline produces analytics-ready CSV datasets that can be used for
+            further analysis or visualization.
+        </p>
+        <ul class="dataset-links">
+            <li><a href="/databricks-pipeline/data/gold_player_summary.csv" target="_blank">Gold Player Summary (CSV)</a></li>
+            <li><a href="/databricks-pipeline/data/gold_player_adv_summary.csv" target="_blank">Gold Player Advanced Metrics (CSV)</a></li>
+            <li><a href="/databricks-pipeline/data/gold_team_summary.csv" target="_blank">Gold Team Summary (CSV)</a></li>
+        </ul>
+    </section>
+
+    <!-- ===================== -->
+    <!-- LIMITATIONS & NEXT STEPS -->
+    <!-- ===================== -->
+    <section>
+        <h2>Limitations & Future Improvements</h2>
+        <ul>
+            <li>Support incremental loads and streaming ingestion</li>
+            <li>Add automated data validation tests</li>
+            <li>Implement CI/CD for pipeline deployments</li>
+            <li>Extend analytics to include advanced efficiency metrics</li>
+        </ul>
+    </section>
+
+    <!-- ===================== -->
+    <!-- ACADEMIC NOTE -->
+    <!-- ===================== -->
+    <section>
+        <h2>Academic Note</h2>
+        <p>
+            Due to academic ownership and infrastructure restrictions, the Databricks workspace
+            and source code are private. This page documents the system design, methodology,
+            and outputs of the project.
+        </p>
+    </section>
+    <script>
+        const iframe = document.querySelector('.nba-dashboard-container iframe');
+
+        iframe.style.height = "500px" ;
+    </script>
+
+</main>
+
+<footer>
+    <p>© 2026 Zakaria Bouzada</p>
+</footer>
+
+</body>
+</html>
