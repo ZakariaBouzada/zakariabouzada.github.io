@@ -399,3 +399,57 @@ footer {
 .btn:hover {
     background-color: #004d99;
 }
+.mini-llm-search {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 0.5rem;
+}
+
+.mini-llm-search input {
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 200px;
+}
+
+.mini-llm-search button {
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.mini-llm-search button:hover {
+    background-color: #005a99;
+}
+.mini-chat-box {
+    max-height: 200px;
+    overflow-y: auto;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.mini-chat-box .chat-msg {
+    margin: 0.25rem 0;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+}
+
+.mini-chat-box .chat-msg.user {
+    background: #e0f2fe;
+    color: #0c4a6e;
+    text-align: right;
+}
+
+.mini-chat-box .chat-msg.ai {
+    background: #f1f5f9;
+    color: #1f2937;
+    text-align: left;
+}

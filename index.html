@@ -24,6 +24,13 @@
         <a href="#stack">Stacks</a>
         <a href="#contact">Contact</a>
     </nav>
+    <!-- Mini AI search bar -->
+    <div class="mini-llm-search">
+        <div id="mini-chat-box" class="mini-chat-box"></div>
+        <input type="text" id="mini-llm-input" placeholder="Ask AI..." aria-label="Search site with AI">
+        <button onclick="miniAskLLM()">Ask</button>
+
+    </div>
 </header>
 
 <main>
@@ -50,6 +57,20 @@
             <p style="text-align:center; margin-top:1rem;">
                 <a href="projects/NBA-dashboard/nba-dashboard.html" target="_blank" class="btn">Open Full NBA Dashboard</a>
             </p>
+        </div>
+
+        <div class="project-card">
+            <h3>AI Search & LLM Demo</h3>
+            <p>
+                Explore a mini AI search engine powered by a Hugging Face LLM (LLaMA 3.2).
+                Ask questions about my projects, skills, and work experience.
+                This project demonstrates backend API integration, frontend interactivity, and AI-powered search functionality.
+            </p>
+            <p>
+                The LLM backend is hosted on Render, ensuring fast, scalable responses without exposing sensitive data.
+                The project showcases my skills in cloud deployment, API design, and AI integration.
+            </p>
+            <a href="projects/LLM-project/llm-search.html" class="project-link">Try AI Search</a>
         </div>
 
         <!-- Additional project cards go here -->
@@ -128,6 +149,6 @@
     <p>© 2026 Zakaria Bouzada</p>
 </footer>
 
-<script src="js/main.js"></script>
+<script src="projects/LLM-project/js/llm-main.js"></script>
 </body>
 </html>
