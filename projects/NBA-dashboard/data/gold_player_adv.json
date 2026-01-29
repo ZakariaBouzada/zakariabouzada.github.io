@@ -1,0 +1,52 @@
+[
+  {
+    "player":"Vince Carter",
+    "total_triple_doubles":26,
+    "total_double_doubles":26
+  },
+  {
+    "player":"Andre Miller",
+    "total_triple_doubles":25,
+    "total_double_doubles":25
+  },
+  {
+    "player":"Jeff Green",
+    "total_triple_doubles":25,
+    "total_double_doubles":25
+  },
+  {
+    "player":"Trevor Ariza",
+    "total_triple_doubles":25,
+    "total_double_doubles":26
+  },
+  {
+    "player":"Kevin Willis",
+    "total_triple_doubles":24,
+    "total_double_doubles":26
+  },
+  {
+    "player":"Ish Smith",
+    "total_triple_doubles":24,
+    "total_double_doubles":25
+  },
+  {
+    "player":"James Edwards",
+    "total_triple_doubles":23,
+    "total_double_doubles":25
+  },
+  {
+    "player":"Rod Strickland",
+    "total_triple_doubles":23,
+    "total_double_doubles":23
+  },
+  {
+    "player":"Juwan Howard",
+    "total_triple_doubles":23,
+    "total_double_doubles":23
+  },
+  {
+    "player":"Joe Johnson",
+    "total_triple_doubles":23,
+    "total_double_doubles":23
+  }
+]

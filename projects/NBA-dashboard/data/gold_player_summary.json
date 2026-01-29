@@ -1,0 +1,62 @@
+[
+  {
+    "player":"Wilt Chamberlain",
+    "avg_season_pts":2122.0625,
+    "avg_season_ast":305.8125,
+    "avg_season_trb":1599.8125
+  },
+  {
+    "player":"Karl Malone",
+    "avg_season_pts":1943.5789473684,
+    "avg_season_ast":276.2105263158,
+    "avg_season_trb":787.7894736842
+  },
+  {
+    "player":"Lebron James",
+    "avg_season_pts":1910.7272727273,
+    "avg_season_ast":524.8181818182,
+    "avg_season_trb":532.0454545455
+  },
+  {
+    "player":"Oscar Robertson",
+    "avg_season_pts":1907.8571428571,
+    "avg_season_ast":706.2142857143,
+    "avg_season_trb":557.4285714286
+  },
+  {
+    "player":"Bob Pettit",
+    "avg_season_pts":1898.1818181818,
+    "avg_season_ast":215.3636363636,
+    "avg_season_trb":1168.0909090909
+  },
+  {
+    "player":"Rick Barry",
+    "avg_season_pts":1805.6428571429,
+    "avg_season_ast":353.7142857143,
+    "avg_season_trb":490.2142857143
+  },
+  {
+    "player":"Jerry West",
+    "avg_season_pts":1799.4285714286,
+    "avg_season_ast":445.5714285714,
+    "avg_season_trb":383.2857142857
+  },
+  {
+    "player":"George Gervin",
+    "avg_season_pts":1770.3125,
+    "avg_season_ast":183.75,
+    "avg_season_trb":389.125
+  },
+  {
+    "player":"Damian Lillard",
+    "avg_season_pts":1738.3076923077,
+    "avg_season_ast":466.8461538462,
+    "avg_season_trb":295.7692307692
+  },
+  {
+    "player":"Trae Young",
+    "avg_season_pts":1719.8571428571,
+    "avg_season_ast":666.2857142857,
+    "avg_season_trb":238.2857142857
+  }
+]
