@@ -4,14 +4,20 @@ async function miniAskLLM() {
     const question = input.value.trim();
     if (!question) return;
 
-    // Display user message
+    // User message
     const userMsg = document.createElement("div");
     userMsg.className = "chat-msg user";
     userMsg.textContent = question;
     chatBox.appendChild(userMsg);
-    chatBox.scrollTop = chatBox.scrollHeight;
 
     input.value = "";
+
+    // Thinking message
+    const thinkingMsg = document.createElement("div");
+    thinkingMsg.className = "chat-msg thinking";
+    thinkingMsg.textContent = "AI is thinking...";
+    chatBox.appendChild(thinkingMsg);
+    chatBox.scrollTop = chatBox.scrollHeight;
 
     try {
         const response = await fetch("https://llm-search-zakariabouzada-github-io.onrender.com/ask", {
@@ -19,57 +25,66 @@ async function miniAskLLM() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ question })
         });
+
         const data = await response.json();
 
-        // Display AI answer
+        thinkingMsg.remove();
+
         const aiMsg = document.createElement("div");
         aiMsg.className = "chat-msg ai";
-        aiMsg.textContent = data.answer;
+        aiMsg.textContent = data.answer || "No response from AI.";
         chatBox.appendChild(aiMsg);
-        chatBox.scrollTop = chatBox.scrollHeight;
 
     } catch (err) {
-        const errorMsg = document.createElement("div");
-        errorMsg.className = "chat-msg ai";
-        errorMsg.textContent = "Error: Could not connect to backend.";
-        chatBox.appendChild(errorMsg);
-        chatBox.scrollTop = chatBox.scrollHeight;
+        thinkingMsg.textContent = "Error connecting to AI.";
     }
+
+    chatBox.scrollTop = chatBox.scrollHeight;
 }
 async function askLLM() {
     const inputBox = document.getElementById("llm-question");
     const chatBox = document.getElementById("chat-box");
+    const button = document.querySelector(".chat-input button");
+
     const question = inputBox.value.trim();
     if (!question) return;
 
-    // Display user message
+    // User message
     const userMsg = document.createElement("div");
     userMsg.className = "chat-msg user";
     userMsg.textContent = question;
     chatBox.appendChild(userMsg);
 
     inputBox.value = "";
+    button.disabled = true;
 
-    // Call backend
+    // Thinking message
+    const thinkingMsg = document.createElement("div");
+    thinkingMsg.className = "chat-msg thinking";
+    thinkingMsg.textContent = "AI is thinking...";
+    chatBox.appendChild(thinkingMsg);
+    chatBox.scrollTop = chatBox.scrollHeight;
+
     try {
         const res = await fetch("https://llm-search-zakariabouzada-github-io.onrender.com/ask", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ question })
         });
+
         const data = await res.json();
 
-        // Display AI answer
+        thinkingMsg.remove();
+
         const aiMsg = document.createElement("div");
         aiMsg.className = "chat-msg ai";
-        aiMsg.textContent = data.answer;
+        aiMsg.textContent = data.answer || "No response from AI.";
         chatBox.appendChild(aiMsg);
-        chatBox.scrollTop = chatBox.scrollHeight;
-    } catch (err) {
-        const errorMsg = document.createElement("div");
-        errorMsg.className = "chat-msg ai";
-        errorMsg.textContent = "Error: Could not connect to backend.";
-        chatBox.appendChild(errorMsg);
-    }
 
+    } catch (err) {
+        thinkingMsg.textContent = "Error: AI backend unreachable.";
+    } finally {
+        button.disabled = false;
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
 }
