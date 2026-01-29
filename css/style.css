@@ -116,7 +116,46 @@ nav a:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(0, 102, 204, 0.25);
 }
+/* Special Styling for Contact Pill */
+nav a.nav-contact {
+    background: linear-gradient(145deg, #1e3a8a, #1e40af) !important; /* Deep Blue base */
+    color: #ffffff !important;
+    border: 2px solid #172554 !important; /* Dark "Outlier" */
+    font-weight: 700;
+    position: relative;
+    overflow: hidden; /* Clips the shine */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
+/* The "Glance" Shine Effect */
+nav a.nav-contact::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -150%;
+    width: 60%;
+    height: 200%;
+    background: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.4) 50%,
+            rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(25deg);
+    transition: all 0.6s ease;
+}
+
+/* Hover Interaction */
+nav a.nav-contact:hover {
+    transform: translateY(-3px) scale(1.05); /* Slight "pop" lift */
+    background: linear-gradient(145deg, #2563eb, #1e40af) !important; /* Brightens on hover */
+    box-shadow: 0 8px 20px rgba(30, 64, 175, 0.4); /* Glowing shadow */
+}
+
+/* Trigger the Shine */
+nav a.nav-contact:hover::after {
+    left: 150%;
+}
 /* ========================= */
 /* Main */
 /* ========================= */
