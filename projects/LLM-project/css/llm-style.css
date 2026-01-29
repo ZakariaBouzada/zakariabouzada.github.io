@@ -1,25 +1,85 @@
-.llm-chat-section {
-    max-width: 700px;
-    margin: 2rem auto;
-    background: #f8fafc;
-    border-radius: 16px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+
+body {
+    background-color: #0f172a; /* Deep Navy/Slate */
+    color: #f1f5f9;
+    margin: 0;
 }
 
-.chat-container {
-    display: flex;
-    flex-direction: column;
+header {
+    background: linear-gradient(180deg, #1e1b4b 0%, #0f172a 100%);
+    border-bottom: 2px solid #6a0dad; /* Purple accent line */
+    padding: 3rem 1rem;
+    text-align: center;
+}
+/* =========================
+   Databricks Project Text Fix
+========================= */
+body.databricks-page main section p {
+    color: #f1f5f9; /* bright, readable light color */
+    font-size: 1rem; /* optional: consistent font size */
+    line-height: 1.6;
+}
+
+
+.llm-report-section {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #1e293b !important; /* Deep Slate */
+    border-radius: 16px;
+    color: #f8fafc !important; /* Force all text to White/Light Gray */
+}
+
+/* Force specific elements to be light */
+.llm-report-section h2,
+.llm-report-section h3,
+.llm-report-section p,
+.llm-report-section li,
+.llm-report-section strong {
+    color: #f8fafc !important;
+}
+
+/* Make links a bright purple so they stand out */
+.llm-report-section a {
+    color: #a78bfa !important;
+    font-weight: bold;
+}
+
+/* Style for the code snippets */
+.llm-report-section code {
+    background: #0f172a;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #38bdf8 !important; /* Light blue for code */
+}
+
+.cta-text {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+}
+
+
+.llm-chat-section {
+    max-width: 800px; /* Slightly wider for better reading */
+    margin: 2rem auto;
+    background: #1e293b; /* Slate background */
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(106, 13, 173, 0.2); /* Subtle purple border */
 }
 
 #chat-box {
-    height: 400px;
-    overflow-y: auto;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    padding: 1rem;
-    background-color: #ffffff;
-    margin-bottom: 1rem;
+    height: 450px;
+    background-color: #0f172a; /* Darker interior for contrast */
+    border: 1px solid #334155;
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .chat-msg {
@@ -29,51 +89,122 @@
     max-width: 80%;
 }
 
+/* User messages - Matches your Pill Gradient */
 .chat-msg.user {
-    background-color: #0066cc;
-    color: #fff;
+    background: linear-gradient(135deg, #6a0dad, #4b0082);
+    color: #ffffff;
     align-self: flex-end;
+    border-bottom-right-radius: 4px; /* Makes it look like a speech bubble */
 }
 
+/* AI messages - Soft Indigo */
 .chat-msg.ai {
-    background-color: #e5f3ff;
-    color: #111;
+    background-color: #334155;
+    color: #f1f5f9;
     align-self: flex-start;
-}
-
-.chat-input {
-    display: flex;
-    gap: 0.5rem;
+    border-bottom-left-radius: 4px;
+    border: 1px solid rgba(106, 13, 173, 0.3);
 }
 
 .chat-input input {
-    flex: 1;
-    padding: 0.5rem 1rem;
+    background: #0f172a;
+    border: 1px solid #475569;
+    color: white;
+    padding: 0.75rem 1.25rem;
     border-radius: 12px;
-    border: 1px solid #ccc;
+    transition: border 0.3s;
+}
+
+.chat-input input:focus {
+    outline: none;
+    border-color: #6a0dad;
+    box-shadow: 0 0 10px rgba(106, 13, 173, 0.2);
 }
 
 .chat-input button {
-    padding: 0.5rem 1rem;
-    border-radius: 12px;
-    border: none;
-    background-color: #0066cc;
-    color: white;
-    cursor: pointer;
-    transition: 0.2s;
+    background: linear-gradient(135deg, #6a0dad, #4b0082);
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    padding: 0 1.5rem;
 }
 
 .chat-input button:hover {
-    background-color: #0055a3;
-}
-.chat-msg.thinking {
-    font-style: italic;
-    opacity: 0.7;
-    animation: pulse 1.4s infinite ease-in-out;
+    filter: brightness(1.2);
+    transform: translateY(-1px);
 }
 
-@keyframes pulse {
-    0% { opacity: 0.4; }
-    50% { opacity: 0.8; }
-    100% { opacity: 0.4; }
+.chat-msg.thinking {
+    color: #94a3b8;
+    background: transparent;
+    border: 1px dashed #6a0dad;
+    animation: glow-pulse 1.5s infinite;
+}
+
+@keyframes glow-pulse {
+    0% { opacity: 0.5; box-shadow: 0 0 5px rgba(106, 13, 173, 0.1); }
+    50% { opacity: 1; box-shadow: 0 0 15px rgba(106, 13, 173, 0.3); }
+    100% { opacity: 0.5; box-shadow: 0 0 5px rgba(106, 13, 173, 0.1); }
+}
+/* LLM Demo - Header Stack Pills */
+.tech-pill.llm {
+    background: linear-gradient(
+            145deg,
+            #8a2be2 0%,   /* Light purple edge */
+            #6a0dad 45%,  /* Main purple */
+            #3b0066 50%,  /* Dark 'crease' for depth */
+            #6a0dad 55%,  /* Main purple */
+            #4b0082 100%  /* Dark bottom edge */
+    ) !important;
+
+    /* 2. 3D Stamped Effect: Light on top, shadow on bottom */
+    box-shadow:
+            inset 0 1px 1px rgba(255, 255, 255, 0.4), /* Highlight edge */
+            0 4px 6px rgba(0, 0, 0, 0.3);             /* Drop shadow */
+
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* Makes text look engraved */
+
+    position: relative;
+    overflow: hidden; /* Needed for the shine effect below */
+    padding: 0.4rem 1rem;
+    font-weight: 600;
+    align-items: center;
+    border-radius: 25px; /* more rounded */
+    font-size: 0.85rem;
+    animation: shine-pulse 5s infinite;
+}
+
+.tech-pill.llm:hover {
+    box-shadow: 0 0 8px #6a0dad;
+    transform: scale(1.05);
+}
+/* Create the shine light streak */
+.tech-pill.llm::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -150%;
+    width: 50%;
+    height: 200%;
+    background: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.4) 50%,
+            rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(30deg);
+    transition: all 0.6s ease;
+}
+
+/* Move the shine when you hover */
+.tech-pill.llm:hover::after {
+    left: 150%;
+}
+
+@keyframes shine-pulse {
+    0% { filter: brightness(1); }
+    80% { filter: brightness(1); }
+    90% { filter: brightness(1.3); } /* Brief flash of light */
+    100% { filter: brightness(1); }
 }

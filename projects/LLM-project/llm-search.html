@@ -13,6 +13,14 @@
 <header class="site-header">
     <h1 style="text-align:center;">AI Search & LLM Demo</h1>
     <p style="text-align:center;">Ask the AI anything — powered by Hugging Face LLaMA 3.2</p>
+
+    <div class="header-tech-stack">
+        <span class="tech-pill llm">LLaMA 3.2</span>
+        <span class="tech-pill llm">Hugging Face</span>
+        <span class="tech-pill llm">Flask API</span>
+        <span class="tech-pill llm">Prompt Engineering</span>
+        <span class="tech-pill llm">Render</span>
+    </div>
     <nav>
         <a href="../../index.html">← Back to Home</a>
     </nav>
@@ -20,7 +28,7 @@
 
 <main>
     <!-- Project Report Section -->
-    <section class="llm-report-section" style="max-width:900px; margin:auto; padding:2rem;">
+    <section class="llm-report-section">
         <h2>Project Overview</h2>
         <p>
             This project demonstrates a mini AI-powered search engine integrated into a personal portfolio website.
@@ -32,33 +40,35 @@
             To showcase capabilities in backend API development, cloud deployment, and AI integration, providing
             an interactive and visually appealing demonstration of AI functionality for visitors and recruiters.
         </p>
-
-        <h3>Model and API</h3>
-        <ul>
-            <li><strong>Model:</strong> Meta LLaMA 3.2 (1B Instruct) — a state-of-the-art large language model.</li>
-            <li><strong>API:</strong> Hugging Face Inference API via <code>https://router.huggingface.co/v1/chat/completions</code>.</li>
-            <li><strong>Key Features:</strong> Chat-style responses, system instructions, max token limit set to 500.</li>
-            <li><strong>Security:</strong> Requests sent via API key stored in a <code>.env</code> file; user data is not persisted externally.</li>
-        </ul>
-
-        <h3>Backend</h3>
+        <div class="report-grid">
+            <div class="report-card">
+            <h3>Model and API</h3>
+            <ul>
+                <li><strong>Model:</strong> Meta LLaMA 3.2 (1B Instruct) — a state-of-the-art large language model.</li>
+                <li><strong>API:</strong> Hugging Face Inference API via <code>https://router.huggingface.co/v1/chat/completions</code>.</li>
+                <li><strong>Key Features:</strong> Chat-style responses, system instructions, max token limit set to 500.</li>
+                <li><strong>Security:</strong> Requests sent via API key stored in a <code>.env</code> file; user data is not persisted externally.</li>
+            </ul>
+        </div>
+    </div>
+        <h3>Technical Architecture</h3>
         <p>
             Built with <strong>Python Flask</strong>, the backend handles incoming requests from the frontend, forwards them to
             the Hugging Face API, and returns AI-generated answers. The backend is deployed on <strong>Render</strong>
             for continuous availability.
         </p>
 
-        <h3>Frontend</h3>
+        <h3>Technical Design</h3>
         <p>
             Interactive chat implemented with HTML, CSS, and JavaScript. Users can type questions into a text box,
             and answers appear in a dynamic chat window above the input. The frontend communicates with the backend
             using asynchronous fetch requests.
         </p>
 
-        <h3>Deployment</h3>
+        <h3>Deployment & Links</h3>
         <ul>
             <li><strong>Backend URL:</strong> <a href="https://llm-search-zakariabouzada-github-io.onrender.com" target="_blank">https://llm-search-zakariabouzada-github-io.onrender.com</a></li>
-            <li>Frontend hosted on GitHub Pages as part of the portfolio website.</li>
+            <li><strong>Frontend:</strong> Hosted via GitHub Pages.</li>
         </ul>
 
         <h3>Challenges and Solutions</h3>
@@ -76,7 +86,7 @@
             <li>Documenting technical projects in a clear, recruiter-friendly manner.</li>
         </ul>
 
-        <p style="text-align:center; margin-top:2rem;">
+        <p class="cta-text">
             <strong>Try the AI search below:</strong>
         </p>
     </section>

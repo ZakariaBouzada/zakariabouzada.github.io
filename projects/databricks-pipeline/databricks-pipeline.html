@@ -5,12 +5,21 @@
     <title>Automated Medallion Data Pipeline</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="databrickscss/databricks-style.css">
 </head>
 <body>
 
 <header>
     <h1>Automated Medallion Data Pipeline</h1>
-    <p>Academic Data Engineering Project · Microsoft Databricks</p>
+
+
+    <div class="header-tech-stack">
+        <span class="tech-pill databricks">Databricks</span>
+        <span class="tech-pill databricks">Medallion Architecture</span>
+        <span class="tech-pill databricks">Python</span>
+        <span class="tech-pill databricks">SQL</span>
+        <span class="tech-pill databricks">Power BI</span>
+    </div>
     <nav>
         <a href="../../index.html">← Back to Home</a>
     </nav>
@@ -62,25 +71,33 @@
 
         <h3>Bronze Layer – Data Ingestion</h3>
         <p>
-            Raw NBA statistics are automatically downloaded from Kaggle using the Kaggle API
-            and ingested into Databricks as Spark DataFrames. The Bronze layer preserves the
-            original structure of the source data to allow traceability and reprocessing.
+            The ingestion process is fully automated using the <strong>Kaggle API</strong> to programmatically fetch the
+            <a href="https://www.kaggle.com/datasets/sumitrodatta/nba-aba-baa-stats" target="_blank" style="color: #0066cc; text-decoration: none; font-weight: 500;">NBA/ABA/BAA Historical Statistics</a>
+            dataset. Link from: sumitrodatta.
+        </p>
+        <p>
+            Raw files are ingested into Databricks as <strong>Spark DataFrames</strong>. The Bronze layer preserves the
+            original structure of the source data, acting as an immutable "Landing Zone" that allows for
+            full traceability and historical reprocessing.
         </p>
 
         <h3>Silver Layer – Data Cleaning & Transformation</h3>
+
         <p>
-            The Silver layer cleans and standardizes the raw data by removing duplicates,
-            handling null values, normalizing team and player identifiers, and casting columns
-            into appropriate numeric types. Additional metadata, such as transformation timestamps,
-            is added to support data lineage.
+            The Silver layer cleans and standardizes the raw data. Key transformations include
+            <strong>removing duplicates</strong>, handling null values, and <strong>normalizing identifiers</strong>
+            across multiple seasons. Data is cast into appropriate numeric types, and technical metadata
+            (such as transformation timestamps) is added to ensure robust data lineage.
         </p>
 
         <h3>Gold Layer – Analytics & Aggregation</h3>
+
         <p>
-            In the Gold layer, cleaned data is aggregated into analytical tables. Key metrics
-            such as points per game (PPG), assists per game (APG), rebounds per game (RPG),
-            double-doubles, and triple-doubles are calculated. These datasets are optimized
-            for downstream analytics and BI consumption.
+            In the Gold layer, the data is refined into high-value analytical tables. We calculate complex
+            aggregations such as <strong>Points Per Game (PPG)</strong>, <strong>Assists Per Game (APG)</strong>,
+            and advanced metrics like <strong>Double-Doubles</strong> and <strong>Triple-Doubles</strong>.
+            These datasets are highly optimized for high-performance consumption by the
+            <strong>JavaScript Dashboard</strong> and <strong>Power BI</strong>.
         </p>
     </section>
 
@@ -118,14 +135,22 @@
     <!-- ===================== -->
     <!-- RESULTS & VISUALS -->
     <!-- ===================== -->
+
     <section>
-        <h2>Results & Visualizations</h2>
+    <h2>Results & Advanced Analytics</h2>
+
+    <div class="project-summary">
         <p>
-            The Gold datasets enable analysis of top performers, trends across seasons,
-            and advanced performance metrics. Sample outputs from the pipeline are shown below.
+            The final stage of the <strong>Medallion Pipeline</strong> transforms raw player data into highly optimized <strong>Gold-tier datasets</strong>. To ensure high-performance rendering for the front-end, the processed <code>.csv</code> outputs from Databricks were converted into lightweight <code>.json</code> structures.
         </p>
+        <p>
+            This language choice allows the <strong>JavaScript-driven dashboard</strong> to fetch and visualize complex player metrics—like triple-double trends and league-wide averages—instantly without server-side lag.
+        </p>
+    </div>
         <!-- Embedded NBA Dashboard -->
         <div class="nba-dashboard-container">
+            <h3>Interactive NBA Analytics Dashboard</h3>
+            <p class="sub-text"><em>Integrated View: Interactive Chart.js visuals powered by the Gold-layer JSON data.</em></p>
             <iframe src="../NBA-dashboard/nba-dashboard.html" title="NBA Dashboard" frameborder="0"></iframe>
         </div>
 
@@ -135,15 +160,35 @@
 
         <!-- IMAGE: top players by average points -->
         <!-- /projects/images/top10_avg_points.png -->
-        <img src="images/top10_avg_points.png"
+
+    <div class="validation-section">
+        <h3>Pipeline Validation & Data Quality Checks</h3>
+        <p>
+            Before the data is exported for the web or external BI tools, I implemented a validation step within the Databricks notebook. Using <strong>Matplotlib</strong> and <strong>Seaborn</strong>, the pipeline generates the following internal visuals to ensure the <strong>Gold Layer</strong> aggregations match the expected distribution and statistical accuracy.
+        </p>
+
+        <div class="validation-gallery">
+            <figure>
+                <img src="images/top10_avg_points.png" alt="Top 10 players by average points">
+                <figcaption>Gold summary table as graph: Verifying season scoring averages against all players.</figcaption>
+            </figure>
+
+            <figure>
+                <img src="images/top10_triple_doubles.png" alt="Top 10 players by triple doubles">
+                <figcaption>Advanced Gold summary table as graph: Control: Ensuring advanced count metrics are correctly aggregated across seasons.</figcaption>
+            </figure>
+        </div>
+    </div>
+    <!--
+         <img src="images/top10_avg_points.png"
              alt="Top 10 players by average points"
              style="max-width:100%; margin-top:1rem;">
 
-        <!-- IMAGE: triple / double doubles -->
-        <!-- /projects/images/top10_triple_doubles.png -->
+        <!- IMAGE: triple / double doubles -->
+        <!-- /projects/images/top10_triple_doubles.png
         <img src="images/top10_triple_doubles.png"
              alt="Top 10 players by triple doubles"
-             style="max-width:100%; margin-top:1rem;">
+             style="max-width:100%; margin-top:1rem;"> */ -->
     </section>
 
     <!-- ===================== -->
