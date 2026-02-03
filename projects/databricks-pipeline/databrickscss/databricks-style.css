@@ -1,6 +1,14 @@
 /* =======================
    NBA Dashboard Header Styling
 ======================= */
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fafafa;
+    color: #222;
+    --accent-line-color: #f4cf3e;
+}
 
 /* Center header content and add spacing */
 header {
@@ -32,8 +40,19 @@ header .subtitle {
     color: #fffacd; /* Light golden */
     font-size: 1.2rem;
     margin-bottom: 1rem;
-    border: 2px solid #8e6d2a !important;
+    border: 2px solid #eacc86 !important;
     text-shadow: 0 0 5px #fffacd, 0 0 10px #FFD700;
+}
+
+/* Pipeline Page - Gold/Data Theme */
+.pipeline-page .back-btn {
+    background: transparent;
+    color: #fdfdfa;
+    border-color: rgba(234,204,134,0.76);
+}
+.pipeline-page .back-btn:hover {
+    background: #eacc86;
+    box-shadow: 0 0 15px rgba(234, 204, 134, 0.4);
 }
 
 /* Center the tech stack pills below header */

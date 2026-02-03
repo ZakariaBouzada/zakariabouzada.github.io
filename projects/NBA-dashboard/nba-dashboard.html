@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="dashboardcss/dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
+<body class="nba-page">
 <header>
 
     <h1>NBA Analytics Dashboard</h1>
@@ -34,20 +34,38 @@
         <a href="../../index.html" class="back-btn"> ← Back to Home</a>
     </nav>
 </header>
+    <main class="dashboard-container">
+        <section class="intro-box">
+            <p>
+                This interactive dashboard visualizes performance metrics for NBA players, specifically focusing on
+                scoring efficiency and versatility (Double/Triple-Doubles).
+            </p>
+            <div class="pipeline-link-note">
+                <span class="icon">⚙️</span>
+                <span>
+                    <strong>Data Provenance:</strong> This dashboard is the "Gold Layer" visualization of my
+                    <a href="../databricks-pipeline/databricks-pipeline.html">Databricks Medallion Pipeline</a>.
+                    It uses optimized JSON exports from a multi-stage ETL process.
+                </span>
+            </div>
+        </section>
+        <div class="kpi-grid">
+            <div class="kpi-card"><h3>Total Players</h3><p id="totalPlayers">–</p></div>
+            <div class="kpi-card"><h3>Avg Points per Season</h3><p id="avgPoints">–</p></div>
+            <div class="kpi-card"><h3>Total Triple Doubles collectively</h3><p id="tripleDoubles">–</p></div>
+        </div>
 
-<div class="kpi-grid">
-    <div class="kpi-card"><h3>Total Players Shown</h3><p id="totalPlayers">–</p></div>
-    <div class="kpi-card"><h3>Avg Points per Season</h3><p id="avgPoints">–</p></div>
-    <div class="kpi-card"><h3>Total Triple Doubles collectively</h3><p id="tripleDoubles">–</p></div>
-</div>
+        <div class="chart-section">
+            <h2>Top 10 Players by Season Averages</h2>
+            <canvas id="pointsChart"></canvas>
 
-<h2>Top 10 Players by Season Averages</h2>
-<canvas id="pointsChart"></canvas>
-<h2>Top 10 Players by Double/Triple Doubles</h2>
-<canvas id="advStatsChart"></canvas>
-<h2>Average Performance Over Time</h2>
-<canvas id="leagueStatsChart"></canvas>
+            <h2>Top 10 Players by Double/Triple Doubles</h2>
+            <canvas id="advStatsChart"></canvas>
 
+            <h2>Average Performance Over Time</h2>
+            <canvas id="leagueStatsChart"></canvas>
+        </div>
+</main>
 
 <script src="js/dashboard.js"></script>
 </body>

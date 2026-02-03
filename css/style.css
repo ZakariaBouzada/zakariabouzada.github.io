@@ -1,9 +1,10 @@
 :root {
-    --primary-color: #0066cc;
-    --secondary-color: #00a99d;
+    --primary-color: #021663;
+    --secondary-color: rgba(175, 179, 195, 0.62);
     --background-color: #fafafa;
     --card-background: #ffffff;
-    --border-color: #e5e7eb;
+    --accent-line-color: rgba(7, 19, 94, 0.76);
+    --border-color: #adb8f3;
     --text-color: #222;
 }
 
@@ -80,6 +81,74 @@ header {
     width: 1px;
     align-self: stretch;
     background: rgba(255, 255, 255, 0.1);
+}
+/* Container to put Name and CV on one line */
+.name-cv-container {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between name and button */
+    margin-bottom: 5px;
+}
+
+/* The Compact CV Badge Button */
+.cv-badge-btn {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--secondary-color); /* Your teal/green color */
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 800;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+
+    /* Soft Glow Animation */
+    animation: cv-pulse 2.5s infinite;
+}
+
+.cv-badge-btn:hover {
+    transform: scale(1.1);
+    background: #ffffff;
+    color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+    animation: none; /* Still on hover */
+}
+
+@keyframes cv-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(196, 207, 225, 0.6); }
+    70% { box-shadow: 0 0 0 10px rgba(0, 169, 157, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 169, 157, 0); }
+}
+
+/* Mobile Tweak: Stack them if the screen is too small */
+@media (max-width: 480px) {
+    .name-cv-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+}
+
+/* Universal Back Button Style */
+.back-btn {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+
+    /* Default color if none is specified */
+    --btn-color: #ffd700;
+    background: transparent;
+}
+
+.back-btn:hover {
+    background-color: var(--btn-color);
+    color: #fff; /* Text turns white when background fills in */
+    box-shadow: 0 0 15px var(--btn-color);
+    transform: translateX(-5px);
 }
 /* ========================= */
 /* Navigation */
@@ -199,7 +268,7 @@ main h2::after {
     display: block;
     width: 60px;
     height: 3px;
-    background: var(--primary-color);
+    background: var(--accent-line-color);
     border-radius: 2px;
     margin-top: 0.4rem;
 }
@@ -536,9 +605,25 @@ footer {
     50% { filter: brightness(1.05); }
 }
 /* ======= Mini LLM Chat Box ======= */
+/* Style the search area */
+/* Prevent the link from "stealing" the click from the input */
+/* 1. The Integrated Search Area */
+.mini-llm-search {
+    padding: 12px;
+    padding-bottom: 18px; /* Added more space at the very bottom of the blue box */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between chat box and input group */
+}
+
+.input-group {
+    display: flex;
+    gap: 5px;
+    margin-top: 2px;
+}
 .mini-llm-search input {
     padding: 0.4rem 0.8rem;
-    border-radius: 8px;
+    border-radius: 5px;
     border: 1px solid #ccc;
     width: 200px;
 }
@@ -546,35 +631,67 @@ footer {
 .mini-llm-search button {
     padding: 0.4rem 0.8rem;
     border-radius: 8px;
-    background-color: var(--primary-color);
+    background-color: #d5a4f8;
     color: #fff;
-    border: none;
     cursor: pointer;
+    font-weight: bold;
+    /* Medallion Essentials */
+    position: relative;
+    overflow: hidden; /* Clips the shine to the button edges */
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+
+    /* Optional: Add a subtle border like the pills have for the "stamped" look */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+/* The Shine Effect (Same as Stack Pills) */
+.mini-llm-search button::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -150%;
+    width: 50%;
+    height: 200%;
+    background: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.4) 50%,
+            rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(25deg);
+    transition: all 0.6s ease;
 }
 
 .mini-llm-search button:hover {
-    background-color: #005a99;
+    background-color: #6a0dac;
+    transform: scale(1.05);    /* Makes it "pop" out */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Trigger the Shine on Hover */
+.mini-llm-search button:hover::after {
+    left: 150%;
 }
 .mini-chat-box {
+    display: none;
     max-height: 200px;
     overflow-y: auto;
     background: #fff;
     border: 1px solid #e5e7eb;
     border-radius: 8px;
     padding: 0.5rem;
-    margin-top: 0.5rem;
     font-size: 0.85rem;
 }
 
 .mini-chat-box .chat-msg {
+    color: #191230;
     margin: 0.25rem 0;
     padding: 0.25rem 0.5rem;
     border-radius: 6px;
 }
 
 .mini-chat-box .chat-msg.user {
-    background: #e0f2fe;
-    color: #0c4a6e;
+    background: #e0cdfd;
+    color: #151514;
     text-align: right;
 }
 
@@ -626,11 +743,33 @@ footer {
     font-weight: 500;
     color: white;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .featured-link:hover {
     transform: translateX(4px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+.featured-link::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -150%;
+    width: 60%;
+    height: 200%;
+    background: linear-gradient(
+            to right,
+            transparent 0%,
+            rgba(255, 255, 255, 0.4) 50%,
+            transparent 100%
+    );
+    transform: rotate(25deg);
+    transition: all 0.6s ease;
+}
+
+.featured-link:hover::after {
+    left: 150%;
 }
 
 /* Subtle themes */
@@ -638,10 +777,22 @@ footer {
     background: linear-gradient(135deg, #f97316, #c2410c);
 }
 
+.featured-item-container {
+    background: linear-gradient(135deg, rgba(126, 70, 221, 0.99), #1e3a8a); /* AI Theme */
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
 .featured-link.ai {
-    background: linear-gradient(135deg, #3b82f6, #1e3a8a);
+    margin-bottom: 0;
+    background: transparent;
+    padding: 1rem;
 }
 
 .featured-link.data {
-    background: linear-gradient(135deg, #10b981, #065f46);
+    background: linear-gradient(135deg, #eacc86, #8c6e31);
 }

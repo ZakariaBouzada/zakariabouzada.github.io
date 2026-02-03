@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="databrickscss/databricks-style.css">
 </head>
-<body>
+<body class="pipeline-page">
 
 <header>
     <h1>Automated Medallion Data Pipeline</h1>
@@ -30,7 +30,7 @@
         <span class="tech-pill databricks">Power BI</span>
     </div>
     <nav>
-        <a href="../../index.html">← Back to Home</a>
+        <a href="../../index.html" class="back-btn">← Back to Home</a>
     </nav>
 </header>
 
@@ -82,7 +82,7 @@
         <p>
             The ingestion process is fully automated using the <strong>Kaggle API</strong> to programmatically fetch the
             <a href="https://www.kaggle.com/datasets/sumitrodatta/nba-aba-baa-stats" target="_blank" style="color: #0066cc; text-decoration: none; font-weight: 500;">NBA/ABA/BAA Historical Statistics</a>
-            dataset. Link from: sumitrodatta.
+            dataset. Link from: <code> https://www.kaggle.com/datasets/sumitrodatta.</code>
         </p>
         <p>
             Raw files are ingested into Databricks as <strong>Spark DataFrames</strong>. The Bronze layer preserves the

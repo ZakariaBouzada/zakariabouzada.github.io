@@ -2,6 +2,7 @@
 body {
     background-color: #0f172a; /* Deep Navy/Slate */
     color: #f1f5f9;
+    --accent-line-color: #6a0dad;
     margin: 0;
 }
 
@@ -18,6 +19,16 @@ body.databricks-page main section p {
     color: #f1f5f9; /* bright, readable light color */
     font-size: 1rem; /* optional: consistent font size */
     line-height: 1.6;
+}
+/* LLM Page - Purple/AI Theme */
+.llm-page .back-btn {
+    background: #6a0dad;
+    color: white;
+    border-color: #3b0066;
+}
+.llm-page .back-btn:hover {
+    background: #4b0082;
+    box-shadow: 0 0 15px rgba(106, 13, 173, 0.4);
 }
 
 
@@ -80,6 +91,11 @@ body.databricks-page main section p {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    /* FIX 1: Enable vertical scrolling and hide horizontal overflow */
+    overflow-y: auto;
+    overflow-x: hidden;
+    word-wrap: break-word; /* Legacy support */
+    overflow-wrap: break-word; /* Modern support */
 }
 
 .chat-msg {
@@ -87,6 +103,11 @@ body.databricks-page main section p {
     margin: 0.5rem 0;
     border-radius: 12px;
     max-width: 80%;
+    /* FIX 2: Force long text/code to wrap to the next line */
+    white-space: pre-wrap;      /* Preserves line breaks from AI but wraps text */
+    word-wrap: break-word;     /* Breaks long words if necessary */
+    overflow-wrap: anywhere;   /* Ensures even long URLs don't break the layout */
+    line-height: 1.5;
 }
 
 /* User messages - Matches your Pill Gradient */

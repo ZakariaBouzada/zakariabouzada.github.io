@@ -22,7 +22,12 @@
         <div class="header-content">
             <img src="assets/images/profiilikuva2.jpg" alt="Zakaria Bouzada" class="profile-pic">
             <div class="header-text">
-                <h1>Zakaria Bouzada</h1>
+                <div class="name-cv-container">
+                    <h1>Zakaria Bouzada</h1>
+                    <a href="assets/docs/CV.(Bouzada_Zakaria_English).pdf" target="_blank" class="cv-badge-btn">
+                        CV
+                    </a>
+                </div>
                 <h2>Computer Engineer | BSc Graduate | MSc Student</h2>
                 <div class="header-tech-stack">
                     <span class="tech-pill silver">Computer Engineering</span>
@@ -43,27 +48,30 @@
                         </a>
                     </li>
                     <li>
-                        <a href="projects/LLM-project/llm-search.html" class="featured-link ai">
-                            🤖 AI Search & LLM Demo
-                        </a>
-                    </li>
-                    <li>
                         <a href="projects/databricks-pipeline/databricks-pipeline.html" class="featured-link data">
                             📊 Databricks Medallion Pipeline
                         </a>
+                    </li>
+                    <li>
+                        <div class="featured-item-container">
+                            <a href="projects/LLM-project/llm-search.html" class="featured-link ai">
+                                🤖 AI Search & LLM Demo
+                            </a>
+                        <!-- Mini AI search bar -->
+                            <div class="mini-llm-search">
+                                <div id="mini-chat-box" class="mini-chat-box"></div>
+                                <div class="input-group">
+                                    <input type="text" id="mini-llm-input" placeholder="Ask AI..." aria-label="Search site with AI">
+                                    <button onclick="miniAskLLM()">Ask</button>
+                                </div>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </section>
         </div>
     </div>
 
-    <!-- Mini AI search bar -->
-    <div class="mini-llm-search">
-        <div id="mini-chat-box" class="mini-chat-box"></div>
-        <input type="text" id="mini-llm-input" placeholder="Ask AI..." aria-label="Search site with AI">
-        <button onclick="miniAskLLM()">Ask</button>
-
-    </div>
 
 
 </header>
@@ -86,6 +94,27 @@
             opportunities in automation, cloud infrastructure, data engineering, or software engineering.
         </p>
     </section>
+
+    <section id="thesis" class="project-card academic-milestone">
+        <div class="academic-badge">Bachelor's Thesis</div>
+        <h3>Digitalisering söder om Sahara (Digitalization in Sub-Saharan Africa)</h3>
+        <p>
+            This research investigates the impact of digital transformation in Sub-Saharan Africa,
+            identifying critical gaps in digital infrastructure and proposing technical solutions
+            for inclusion. By analyzing mobile technology accessibility and investment data,
+            the study concludes that coordinated efforts in infrastructure and education are
+            essential for sustainable digital development in the region.
+        </p>
+
+        <p class="language-note">
+            <strong>Note:</strong> This thesis is written in <strong>Swedish</strong>.
+        </p>
+
+        <a href="assets/docs/Digitalisering söder om Sahara (Zakaria Bouzada).pdf" target="_blank" class="project-link">
+            📄 Read Thesis (PDF)
+        </a>
+    </section>
+
     <section id="projects">
         <h2>Projects</h2>
 

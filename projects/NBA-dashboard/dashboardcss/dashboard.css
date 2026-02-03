@@ -9,12 +9,13 @@ body {
     padding: 0;
     background-color: #fafafa;
     color: #222;
+    --accent-line-color: #f49634;
 }
 
 header {
     background: #051c2c; /* Deep NBA Navy */
     /* OR use a gradient for a premium look: */
-    background: linear-gradient(135deg, #051c2c 0%, #002b5c 100%);
+    background: linear-gradient(135deg, #082493 0%, rgb(255, 148, 3) 200%);
 
     padding: 40px 20px;
     text-align: center;
@@ -33,6 +34,16 @@ h1 {
     color: #555;
     margin-bottom: 2rem;
     font-size: 1.1rem;
+}
+/* NBA Page - Orange/Dark Theme */
+.nba-page .back-btn {
+    background: linear-gradient(135deg, #f97316, #c2410c); /* NBA Orange */
+    color: white;
+    border: none;
+}
+.nba-page .back-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
 }
 
 /* KPI cards grid */

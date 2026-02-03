@@ -1,8 +1,18 @@
+// Wake up the Render server as soon as the page loads
+window.addEventListener('DOMContentLoaded', () => {
+    fetch("https://llm-search-zakariabouzada-github-io.onrender.com/ping")
+        .then(() => console.log("Server waking up..."))
+        .catch(() => console.log("Server spin-up initiated."));
+});
+
 async function miniAskLLM() {
     const input = document.getElementById("mini-llm-input");
     const chatBox = document.getElementById("mini-chat-box");
     const question = input.value.trim();
     if (!question) return;
+
+    // SHOW THE BOX: Change display from 'none' to 'block'
+    chatBox.style.display = "block";
 
     // User message
     const userMsg = document.createElement("div");
@@ -10,6 +20,7 @@ async function miniAskLLM() {
     userMsg.textContent = question;
     chatBox.appendChild(userMsg);
 
+    chatBox.scrollTop = chatBox.scrollHeight;
     input.value = "";
 
     // Thinking message
@@ -54,6 +65,9 @@ async function askLLM() {
     userMsg.className = "chat-msg user";
     userMsg.textContent = question;
     chatBox.appendChild(userMsg);
+
+    // Scroll after user speaks
+    chatBox.scrollTop = chatBox.scrollHeight;
 
     inputBox.value = "";
     button.disabled = true;

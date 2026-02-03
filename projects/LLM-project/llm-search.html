@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="css/llm-style.css">
     <script src="js/llm-main.js"></script>             <!-- LLM project JS -->
 </head>
-<body>
+<body class="llm-page">
 
 <header class="site-header">
     <h1 style="text-align:center;">AI Search & LLM Demo</h1>
@@ -31,7 +31,7 @@
         <span class="tech-pill llm">Render</span>
     </div>
     <nav>
-        <a href="../../index.html">← Back to Home</a>
+        <a href="../../index.html" class="back-btn">← Back to Home</a>
     </nav>
 </header>
 
@@ -54,7 +54,7 @@
             <h3>Model and API</h3>
             <ul>
                 <li><strong>Model:</strong> Meta LLaMA 3.2 (1B Instruct) — a state-of-the-art large language model.</li>
-                <li><strong>API:</strong> Hugging Face Inference API via <code>https://router.huggingface.co/v1/chat/completions</code>.</li>
+                <li><strong>API:</strong> <a href="https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct" target="_blank"> Hugging Face Inference API </a> via <code>HuggingFace.co/meta-llama/</code>. </li>
                 <li><strong>Key Features:</strong> Chat-style responses, system instructions, max token limit set to 500.</li>
                 <li><strong>Security:</strong> Requests sent via API key stored in a <code>.env</code> file; user data is not persisted externally.</li>
             </ul>
