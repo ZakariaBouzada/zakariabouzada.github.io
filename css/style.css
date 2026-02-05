@@ -796,3 +796,42 @@ footer {
 .featured-link.data {
     background: linear-gradient(135deg, #eacc86, #8c6e31);
 }
+
+.social-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.social-link {
+    display: flex;   /* Forces image and text to stay on the same line */
+    align-items: center;    /* Vertically centers the text with the logo */
+    text-decoration: none;  /* Removes underline */
+    /* THE FIX: */
+    width: fit-content;     /* Only takes up as much space as the link needs */
+    margin-top: 2px;
+    gap: 5px;               /* This creates the space between the Logo and the Link */
+    color: inherit;
+    /* The "Ghost" Button Look */
+    background-color: transparent;
+    border: 1px solid #333;  /* 2px thickness, solid style, and the color */
+    border-radius: 6px;      /* Smooths the corners */
+
+    /* Spacing inside and outside */
+    padding: 6px 12px;       /* Top/Bottom and Left/Right padding */
+    transition: all 0.3s ease; /* Makes the hover effect smooth */
+
+}
+/* Hover Effect - Changes the border/text color when moused over */
+.social-link:hover {
+    border-color: #333;   /* Changes border to blue */
+    color: #fff;          /* Changes text to blue */
+    background-color: rgb(21, 21, 20); /* Very light blue tint on hover */
+}
+
+.contact-icon {
+    width: 20px;            /* Size of the logo */
+    height: 20px;           /* Keeping it square */
+    margin: 0;
+    display: inline-block;  /* Ensures it doesn't act like a block */
+    object-fit: contain;    /* Prevents the logo from stretching */
+}
