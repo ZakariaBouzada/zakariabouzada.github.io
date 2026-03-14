@@ -9,7 +9,7 @@ load_dotenv()
 HF_API_KEY = os.getenv("HF_API_KEY")
 
 # 1. Using Llama 3.2 (Ensure you requested access on Hugging Face first!)
-MODEL = "mistralai/Mistral-7B-Instruct-v0.3"
+MODEL = "meta-llama/Llama-3.2-3B-Instruct"
 # 2. Correct Router URL for Chat
 HF_URL = "https://router.huggingface.co/v1/chat/completions"
 
