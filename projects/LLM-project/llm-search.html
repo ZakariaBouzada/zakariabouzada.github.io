@@ -40,63 +40,80 @@
     <section class="llm-report-section">
         <h2>Project Overview</h2>
         <p>
-            This project demonstrates a mini AI-powered search engine integrated into a personal portfolio website.
-            Users can ask questions about my skills, projects, or experiences, and the AI provides responses in real time.
+            This project demonstrates an AI-powered assistant integrated into a personal portfolio website.
+            Visitors and recruiters can ask questions about Zakaria's skills, projects, and background,
+            and receive accurate, concise responses in real time.
         </p>
 
         <h3>Objective</h3>
         <p>
-            To showcase capabilities in backend API development, cloud deployment, and AI integration, providing
-            an interactive and visually appealing demonstration of AI functionality for visitors and recruiters.
+            To showcase capabilities in backend API development, cloud deployment, prompt engineering, and AI integration —
+            providing an interactive demonstration of full-stack AI functionality for visitors and recruiters.
         </p>
+
         <div class="report-grid">
             <div class="report-card">
-            <h3>Model and API</h3>
-            <ul>
-                <li><strong>Model:</strong> Meta LLaMA 3.2 (1B Instruct) — a state-of-the-art large language model.</li>
-                <li><strong>API:</strong> <a href="https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct" target="_blank"> Hugging Face Inference API </a> via <code>HuggingFace.co/meta-llama/</code>. </li>
-                <li><strong>Key Features:</strong> Chat-style responses, system instructions, max token limit set to 500.</li>
-                <li><strong>Security:</strong> Requests sent via API key stored in a <code>.env</code> file; user data is not persisted externally.</li>
-            </ul>
+                <h3>Model and API</h3>
+                <ul>
+                    <li><strong>Model:</strong> <a href="https://huggingface.co/Qwen/Qwen2.5-7B-Instruct" target="_blank">Qwen2.5-7B-Instruct</a> — a 7 billion parameter instruction-tuned language model by Alibaba Cloud, optimized for chat and instruction following.</li>
+                    <li><strong>Provider:</strong> Served via the Hugging Face Router API at <code>https://router.huggingface.co/v1/chat/completions</code>, automatically routing to the fastest available inference provider.</li>
+                    <li><strong>Key Features:</strong> Conversation history (last 5 exchanges), system prompt with strict facts, few-shot examples for consistent response style, max token limit set to 150.</li>
+                    <li><strong>Security:</strong> API key stored server-side in a <code>.env</code> file on Render — never exposed to the frontend. User data is not persisted.</li>
+                </ul>
+            </div>
         </div>
-    </div>
+
         <h3>Technical Architecture</h3>
         <p>
-            Built with <strong>Python Flask</strong>, the backend handles incoming requests from the frontend, forwards them to
-            the Hugging Face API, and returns AI-generated answers. The backend is deployed on <strong>Render</strong>
-            for continuous availability.
+            Built with <strong>Python Flask</strong>, the backend handles incoming requests from the frontend,
+            maintains conversation history, and forwards structured message payloads to the Hugging Face Router API.
+            The backend is deployed on <strong>Render</strong> for continuous availability with a server wake-up
+            ping on page load to minimize cold start delays.
         </p>
 
         <h3>Technical Design</h3>
         <p>
-            Interactive chat implemented with HTML, CSS, and JavaScript. Users can type questions into a text box,
-            and answers appear in a dynamic chat window above the input. The frontend communicates with the backend
-            using asynchronous fetch requests.
+            Interactive chat implemented with vanilla HTML, CSS, and JavaScript — no frameworks.
+            The frontend sends asynchronous fetch requests to the Flask backend, passing the user question
+            and full conversation history with each request. Responses stream back into a dynamic chat window.
+            A mini version of the chat is embedded directly on the homepage header for immediate engagement.
+        </p>
+
+        <h3>Prompt Engineering</h3>
+        <p>
+            The assistant uses a structured system prompt combining strict behavioral rules, a curated FACTS section
+            derived from Zakaria's CV, and few-shot examples to enforce concise and accurate responses.
+            This approach ensures the model stays on-topic and avoids hallucination without requiring fine-tuning.
         </p>
 
         <h3>Deployment & Links</h3>
         <ul>
             <li><strong>Backend URL:</strong> <a href="https://llm-search-zakariabouzada-github-io.onrender.com" target="_blank">https://llm-search-zakariabouzada-github-io.onrender.com</a></li>
             <li><strong>Frontend:</strong> Hosted via GitHub Pages.</li>
+            <li><strong>Model:</strong> <a href="https://huggingface.co/Qwen/Qwen2.5-7B-Instruct" target="_blank">Qwen/Qwen2.5-7B-Instruct on Hugging Face</a></li>
         </ul>
 
         <h3>Challenges and Solutions</h3>
         <ul>
-            <li>Hugging Face deprecated <code>api-inference.huggingface.co</code> — solution: migrated to <code>router.huggingface.co</code>.</li>
-            <li>Handling CORS for GitHub Pages — solution: enabled Flask CORS in the backend.</li>
-            <li>Mini chat integration on homepage — solution: added a compact search bar with pop-up chat responses.</li>
+            <li>Used the model Llama 3.2-1B-Instruct, but the model was too small and didn't follow instructions, so had to find a free, fast and reliable model to replace it</li>
+            <li>Hugging Face deprecated <code>api-inference.huggingface.co</code> — solution: migrated to <code>router.huggingface.co</code> with provider routing.</li>
+            <li>Handling CORS for GitHub Pages — solution: enabled Flask-CORS in the backend.</li>
+            <li>Model hallucination and rambling — solution: strict system prompt rules, reduced max tokens, lowered temperature to 0.3, and few-shot prompting.</li>
+            <li>Cold start latency on Render free tier — solution: server wake-up ping sent automatically on page load.</li>
+            <li>Mini chat integration on homepage — solution: compact embedded chat with suggested question chips for immediate engagement.</li>
         </ul>
 
         <h3>Learning Outcomes</h3>
         <ul>
-            <li>API integration and managing API keys securely.</li>
-            <li>Deploying a backend service for public access.</li>
-            <li>Building an interactive frontend chat interface.</li>
-            <li>Documenting technical projects in a clear, recruiter-friendly manner.</li>
+            <li>Integrating third-party LLM APIs and managing API keys securely in production.</li>
+            <li>Prompt engineering techniques — system prompts, few-shot examples, temperature tuning.</li>
+            <li>Deploying and maintaining a Python Flask backend on a cloud platform.</li>
+            <li>Building conversational UI with stateful history in vanilla JavaScript.</li>
+            <li>Navigating real-world API deprecations and provider migration in a live deployment.</li>
         </ul>
 
         <p class="cta-text">
-            <strong>Try the AI search below:</strong>
+            <strong>Try the AI assistant below:</strong>
         </p>
     </section>
 
