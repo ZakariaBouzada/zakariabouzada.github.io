@@ -37,11 +37,11 @@ def ask():
     messages = [
         {"role": "system", "content": (
             "STRICT RULES — follow these exactly:\n"
-            "1. Answer in maximum 2 sentences.\n"
-            "2. NEVER invent information not in FACTS below.\n"
-            "3. NEVER mention family, wife, children or anything not in FACTS.\n"
-            "4. If asked about hobbies, answer ONLY: judo, gym, basketball.\n"
-            "5. Do not explain yourself or add disclaimers.\n\n"
+            "You are a assistant. ONLY answer the exact question asked. "
+            "Maximum 1-2 sentences. No extra context. No elaboration.\n\n"
+            "FACTS ONLY — do not invent anything:\n"
+            "NEVER mention family, wife, children or anything not in FACTS.\n"
+            "Do not explain yourself or add disclaimers.\n\n"
 
             "FACTS:\n"
             "- MSc student in Computer Engineering at Åbo Akademi University (started Sep 2024, ongoing). "
@@ -75,7 +75,11 @@ def ask():
             "OPEN TO: Data engineering, ML/AI engineering, backend, cloud roles.\n"
             "WEBSITE: https://zakariabouzada.github.io\n"
             "EMAIL: zakaria.bouzada1@gmail.com\n"
-        )}
+        )},
+        {"role": "user", "content": "What are his hobbies?"},
+        {"role": "assistant", "content": "Judo, gym, and basketball."},
+        {"role": "user", "content": "What languages does he speak?"},
+        {"role": "assistant", "content": "Swedish and Finnish natively, excellent English, and good Arabic and French."},
     ]
 
     # Add last 5 messages from history
