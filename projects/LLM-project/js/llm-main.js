@@ -8,6 +8,8 @@ const SUGGESTED_QUESTIONS = [
     "Is he available for work?"
 ];
 
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 // Wake up the Render server as soon as the page loads
 window.addEventListener('DOMContentLoaded', () => {
     fetch("https://llm-search-zakariabouzada-github-io.onrender.com/ping")
@@ -104,6 +106,7 @@ async function miniAskLLM() {
                             if (parsed.token) {
                                 aiMsg.textContent += parsed.token;
                                 chatBox.scrollTop = chatBox.scrollHeight;
+                                await sleep(30)
                             }
                         } catch {}
                     }
@@ -181,6 +184,7 @@ async function askLLM() {
                             if (parsed.token) {
                                 aiMsg.textContent += parsed.token;
                                 chatBox.scrollTop = chatBox.scrollHeight;
+                                await sleep(30)
                             }
                         } catch {
                         }
