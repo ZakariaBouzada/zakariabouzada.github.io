@@ -68,29 +68,51 @@ async function miniAskLLM() {
     chatBox.appendChild(thinkingMsg);
     chatBox.scrollTop = chatBox.scrollHeight;
 
+    // Create AI message box immediately — text streams into it
+    const aiMsg = document.createElement("div");
+    aiMsg.className = "chat-msg ai";
+    aiMsg.textContent = "";
+    chatBox.appendChild(aiMsg);
+
     try {
-        const response = await fetch("https://llm-search-zakariabouzada-github-io.onrender.com/ask", {
+        const response = await fetch("https://llm-search-zakariabouzada-github-io.onrender.com/ask-stream", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ question, history: miniChatHistory })
         });
 
-        const data = await response.json();
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
 
-        thinkingMsg.remove();
+        thinkingMsg.remove()
 
-        if (data.history) miniChatHistory = data.history;
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
 
-        const aiMsg = document.createElement("div");
-        aiMsg.className = "chat-msg ai";
-        aiMsg.textContent = data.answer || "No response from AI.";
-        chatBox.appendChild(aiMsg);
+            const chunk = decoder.decode(value);
+            const lines = chunk.split("\n");
 
+            for (const line of lines) {
+                if (line.startsWith("data: ")) {
+                    const dataStr = line.slice(6);
+                    if (dataStr.startsWith("[HISTORY]")) {
+                        miniChatHistory = JSON.parse(dataStr.slice(9));
+                    } else {
+                        try {
+                            const parsed = JSON.parse(dataStr);
+                            if (parsed.token) {
+                                aiMsg.textContent += parsed.token;
+                                chatBox.scrollTop = chatBox.scrollHeight;
+                            }
+                        } catch {}
+                    }
+                }
+            }
+        }
     } catch (err) {
-        thinkingMsg.textContent = "Error connecting to AI.";
+        aiMsg.textContent = "Error connecting to AI.";
     }
-
-    chatBox.scrollTop = chatBox.scrollHeight;
 }
 async function askLLM() {
     const inputBox = document.getElementById("llm-question");
@@ -123,28 +145,52 @@ async function askLLM() {
     chatBox.appendChild(thinkingMsg);
     chatBox.scrollTop = chatBox.scrollHeight;
 
+    // Create AI message box immediately — text streams into it
+    const aiMsg = document.createElement("div");
+    aiMsg.className = "chat-msg ai";
+    aiMsg.textContent = "";
+    chatBox.appendChild(aiMsg);
+
     try {
-        const res = await fetch("https://llm-search-zakariabouzada-github-io.onrender.com/ask", {
+        const response = await fetch("https://llm-search-zakariabouzada-github-io.onrender.com/ask-stream", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ question, history: fullChatHistory})
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({question, history: fullChatHistory})
         });
 
-        const data = await res.json();
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
 
-        thinkingMsg.remove();
+        thinkingMsg.remove()
 
-        if (data.history) fullChatHistory = data.history;
+        while (true) {
+            const {done, value} = await reader.read();
+            if (done) break;
 
-        const aiMsg = document.createElement("div");
-        aiMsg.className = "chat-msg ai";
-        aiMsg.textContent = data.answer || "No response from AI.";
-        chatBox.appendChild(aiMsg);
+            const chunk = decoder.decode(value);
+            const lines = chunk.split("\n");
 
+            for (const line of lines) {
+                if (line.startsWith("data: ")) {
+                    const dataStr = line.slice(6);
+                    if (dataStr.startsWith("[HISTORY]")) {
+                        fullChatHistory = JSON.parse(dataStr.slice(9));
+                    } else {
+                        try {
+                            const parsed = JSON.parse(dataStr);
+                            if (parsed.token) {
+                                aiMsg.textContent += parsed.token;
+                                chatBox.scrollTop = chatBox.scrollHeight;
+                            }
+                        } catch {
+                        }
+                    }
+                }
+            }
+        }
     } catch (err) {
-        thinkingMsg.textContent = "Error: AI backend unreachable.";
+        aiMsg.textContent = "Error connecting to AI.";
     } finally {
         button.disabled = false;
-        chatBox.scrollTop = chatBox.scrollHeight;
     }
 }
