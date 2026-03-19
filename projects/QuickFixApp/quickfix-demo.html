@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickFix — Live Demo</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Portfolio base styles -->
+    <link rel="stylesheet" href="../../css/style.css">
+
+    <!-- QuickFix styles -->
+    <link rel="stylesheet" href="../../css/quickfix-style.css">
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<!-- Header -->
+<header class="qf-header">
+    <div class="qf-header-inner">
+
+        <div class="qf-tagline">Startup MVP · Interactive Demo</div>
+        <h1>Quick<span>Fix</span></h1>
+        <p>On-demand mobile mechanics for bikes, e-scooters, and beyond. Click anywhere on the map to simulate a real service request.</p>
+        <div class="qf-stack-pills">
+            <span class="qf-pill">Kotlin</span>
+            <span class="qf-pill">Android Studio</span>
+            <span class="qf-pill">Firebase</span>
+            <span class="qf-pill">Node.js</span>
+            <span class="qf-pill">Google Maps API</span>
+            <span class="qf-pill">OkHttp</span>
+            <span class="qf-pill">ImageKit</span>
+            <span class="qf-pill">Swift</span>
+        </div>
+        <nav class="back-nav">
+            <a href="../../index.html" class="back-btn">← Back to Portfolio</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Main -->
+<div class="qf-main">
+
+    <!-- Left: Map -->
+    <div class="map-panel">
+        <div class="map-instruction">Click anywhere on the map to place a service request</div>
+        <div id="map"></div>
+
+        <!-- Status steps -->
+        <div class="status-tracker">
+            <div class="status-label">Service Pipeline</div>
+            <div class="status-steps">
+                <div class="status-step" id="step-idle">
+                    <div class="step-dot">○</div>
+                    <div class="step-name">Idle</div>
+                </div>
+                <div class="status-step" id="step-matching">
+                    <div class="step-dot">◎</div>
+                    <div class="step-name">Matching</div>
+                </div>
+                <div class="status-step" id="step-enroute">
+                    <div class="step-dot">→</div>
+                    <div class="step-name">En Route</div>
+                </div>
+                <div class="status-step" id="step-repairing">
+                    <div class="step-dot">⚙</div>
+                    <div class="step-name">Repairing</div>
+                </div>
+                <div class="status-step" id="step-done">
+                    <div class="step-dot">✓</div>
+                    <div class="step-name">Done</div>
+                </div>
+            </div>
+            <div class="progress-bar-wrap">
+                <div id="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right: Panel -->
+    <div class="right-panel">
+
+        <!-- Status badge -->
+        <div class="status-badge-card">
+            <div class="badge-label">System Status</div>
+            <span id="status-badge">IDLE</span>
+            <p id="status-message">Click on the map to initiate a service request.</p>
+        </div>
+
+        <!-- Mechanic card -->
+        <div class="mechanic-card" id="mechanic-card">
+            <div class="mechanic-header">
+                <div class="mechanic-avatar">🔧</div>
+                <div class="mechanic-info">
+                    <h4 id="mechanic-name">Mechanic #101</h4>
+                    <p id="mechanic-type">E-Scooter Specialist · 4.9★</p>
+                </div>
+            </div>
+            <div class="mechanic-stats">
+                <div class="mstat">
+                    <div class="mstat-val" id="stat-eta">—</div>
+                    <div class="mstat-key">ETA</div>
+                </div>
+                <div class="mstat">
+                    <div class="mstat-val" id="stat-dist">—</div>
+                    <div class="mstat-key">Distance</div>
+                </div>
+                <div class="mstat">
+                    <div class="mstat-val" id="stat-price">—</div>
+                    <div class="mstat-key">Est. Cost</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Log box -->
+        <div class="log-card">
+            <div class="log-header">System Log</div>
+            <div id="log-box"></div>
+        </div>
+
+        <button id="reset-btn" onclick="resetDemo()">↺ Reset Demo</button>
+    </div>
+</div>
+
+<!-- Info sections -->
+<div class="qf-info">
+    <div class="info-card">
+        <h3>Technical Architecture</h3>
+        <ul>
+            <li>Native Android app built with Kotlin, iOS with Swift</li>
+            <li>Firebase handles auth, Realtime Database, and Analytics</li>
+            <li>Node.js middleware secures ImageKit API keys for uploads</li>
+            <li>OkHttp client handles all backend API communication</li>
+            <li>Google Maps SDK powers real-time location features</li>
+            <li>This demo uses Leaflet.js to simulate the core flow</li>
+        </ul>
+    </div>
+    <div class="info-card">
+        <h3>Expansion Roadmap</h3>
+        <table class="roadmap-table">
+            <thead>
+            <tr>
+                <th>Tier</th>
+                <th>Vehicle</th>
+                <th>Repair Type</th>
+                <th>Radius</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><span class="tier-badge micro">MICRO</span></td>
+                <td>Bike / E-Scooter</td>
+                <td>Tires, Brakes, Lights</td>
+                <td>3km</td>
+            </tr>
+            <tr>
+                <td><span class="tier-badge heavy">HEAVY</span></td>
+                <td>Motorcycle</td>
+                <td>Chain, Battery, Oil</td>
+                <td>10km</td>
+            </tr>
+            <tr>
+                <td><span class="tier-badge future">FUTURE</span></td>
+                <td>Car</td>
+                <td>Full Diagnostics, Towing</td>
+                <td>25km</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="info-card">
+        <h3>Business Model</h3>
+        <ul>
+            <li>On-demand service request via mobile app</li>
+            <li>Mechanic marketplace with ratings and specializations</li>
+            <li>Commission-based revenue per completed repair</li>
+            <li>SLA target: mechanic on-site within 20 minutes</li>
+            <li>Future: subscription tiers for frequent users</li>
+        </ul>
+    </div>
+    <div class="info-card">
+        <h3>My Role</h3>
+        <ul>
+            <li>Co-founded with 3 teammates (2 dev, 2 management)</li>
+            <li>Led Android development with Kotlin and XML layouts</li>
+            <li>iOS built by co-developer using Swift — shared Firebase backend</li>
+            <li>Integrated Firebase Auth and Realtime Database</li>
+            <li>Implemented Google Maps location features</li>
+            <li>Set up Node.js middleware for ImageKit security</li>
+            <li>Currently developing MVP toward startup launch</li>
+        </ul>
+    </div>
+</div>
+
+<!-- QuickFix JS -->
+<script src="js/quickfix.js"></script>
+
+</body>
+</html>

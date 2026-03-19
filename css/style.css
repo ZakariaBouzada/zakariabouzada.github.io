@@ -482,6 +482,13 @@ main section:hover {
 @keyframes rotateBorder {
     to { --angle: 360deg; }
 }
+/* QuickFix card — dark gold glow */
+.project-card.card-quickfix {
+    --card-glow: #e4a800;
+    --card-glow-bright: #fff8e0;
+    border: 1px solid rgba(228, 168, 0, 0.2);
+    background: linear-gradient(135deg, #ffffff 0%, #fffdf5 100%);
+}
 
 /* Databricks card — gold glow */
 .project-card.card-databricks {
@@ -509,6 +516,15 @@ main section:hover {
     transform: translateY(-5px);
     box-shadow: 0 16px 40px rgba(0,0,0,0.1);
 }
+
+.project-card.card-quickfix:hover {
+    transform: translateY(-5px);
+    box-shadow:
+            0 0 30px 8px rgba(228, 168, 0, 0.3),
+            0 0 60px 15px rgba(228, 168, 0, 0.12),
+            0 16px 40px rgba(0, 0, 0, 0.1);
+}
+
 .project-card.card-databricks:hover {
     transform: translateY(-5px);
     box-shadow:
@@ -557,7 +573,28 @@ main section:hover {
     box-shadow: 0 8px 20px rgba(2, 22, 99, 0.35);
     background: linear-gradient(135deg, #1e40af, var(--primary-color));
     text-decoration: none;
+}
 
+.project-card.card-quickfix .project-link {
+    background: linear-gradient(135deg, #0a0d14, #1a1f35);
+    border: 1px solid rgba(228, 168, 0, 0.4);
+    color: #e4a800;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.project-card.card-quickfix .project-link:hover {
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow:
+            0 0 20px 6px rgba(228, 168, 0, 0.35),
+            0 0 40px 12px rgba(228, 168, 0, 0.15),
+            0 8px 20px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #111520, #0a0d14);
+    color: #f5b800;
+}
+
+.card-quickfix-stat {
+    color: #b37d00 !important;
 }
 
 /* ========================= */
@@ -1203,7 +1240,24 @@ footer {
 
 .featured-link.nba  { background: linear-gradient(135deg, #f97316, #c2410c); }
 .featured-link.data { background: linear-gradient(135deg, #eacc86, #8c6e31); }
-
+.featured-link.quickfix {
+    background: linear-gradient(135deg, #0d0f1a 0%, #1a1f35 100%);
+    border: 1px solid rgba(228, 168, 0, 0.3);
+    color: #e4a800;
+    font-family: 'Syne', sans-serif;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+}
+.featured-link.ai {
+    margin-bottom: 0;
+    background: transparent;
+    padding: 1rem;
+}
+.featured-link.quickfix:hover {
+    border-color: rgba(228, 168, 0, 0.7);
+    box-shadow: 0 0 20px rgba(228, 168, 0, 0.25);
+}
 .featured-item-container {
     background: linear-gradient(135deg, rgba(126,70,221,0.95), #1e3a8a);
     border-radius: 12px;
@@ -1213,13 +1267,17 @@ footer {
     border: 1px solid rgba(255,255,255,0.1);
     box-shadow: 0 8px 24px rgba(0,0,0,0.3);
 }
-
-.featured-link.ai {
-    margin-bottom: 0;
-    background: transparent;
-    padding: 1rem;
+.qf-title-white {
+    color: #ffffff;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
 }
 
+.qf-title-gold {
+    color: #e4a800;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+}
 /* ========================= */
 /* Academic badge */
 /* ========================= */

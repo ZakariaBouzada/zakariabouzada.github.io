@@ -62,6 +62,11 @@
                 <h3>Featured Projects</h3>
                 <ul class="featured-list">
                     <li>
+                        <a href="projects/QuickFixApp/quickfix-demo.html" class="featured-link quickfix" onclick="trackProjectClick('QuickFix Demo')">
+                            <span class="qf-title-white">Quick</span><span class="qf-title-gold">Fix</span> 🔧
+                        </a>
+                    </li>
+                    <li>
                         <a href="projects/NBA-dashboard/nba-dashboard.html" class="featured-link nba" onclick="trackProjectClick('NBA Dashboard')">
                             🏀 NBA Analytics Dashboard
                         </a>
@@ -124,6 +129,35 @@
     <section id="projects" class="fade-up">
         <h2>Projects</h2>
 
+        <div class="project-card card-quickfix fade-up delay-1">
+            <h3>QuickFix — On-Demand Mobile Mechanic Platform</h3>
+            <p>
+                Co-founded and built a cross-platform mobile application connecting users with nearby mechanics
+                for on-demand bike and e-scooter repairs. Developed the Android frontend with Kotlin and XML layouts,
+                integrating Firebase for real-time database and authentication, Google Maps SDK for location-based
+                mechanic discovery, and a Node.js middleware layer to secure ImageKit API keys for image uploads.
+                iOS counterpart built by co-developer using Swift on the same Firebase backend.
+            </p>
+
+            <div class="stat-row">
+                <div class="stat-item">
+                    <span class="stat-number card-quickfix-stat">4</span>
+                    <span class="stat-label">Team members</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number card-quickfix-stat">2</span>
+                    <span class="stat-label">Platforms</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number card-quickfix-stat">MVP</span>
+                    <span class="stat-label">Stage</span>
+                </div>
+            </div>
+
+            <p><em>Active startup — currently developing toward public launch.</em></p>
+            <a href="projects/QuickFixApp/quickfix-demo.html" class="project-link" onclick="trackProjectClick('QuickFix Demo')">Go to Demo →</a>
+        </div>
+
         <!-- Databricks card — gold border glow -->
         <div class="project-card card-databricks fade-up delay-1">
             <h3>Automated Medallion Data Pipeline (Academic Project)</h3>
@@ -167,8 +201,8 @@
         <div class="project-card card-llm fade-up delay-2">
             <h3>AI Search & LLM Demo</h3>
             <p>
-                A production-deployed AI search engine integrated into this portfolio. Powered by Meta LLaMA 3.2
-                (1B parameters) via the Hugging Face Inference API, with a Python Flask middleware layer handling
+                A production-deployed AI search engine integrated into this portfolio. Powered by Qwen 2.5
+                (7B parameters) via the Hugging Face Inference API, with a Python Flask middleware layer handling
                 routing, CORS, and API key security. The backend is deployed on Render; the frontend runs
                 asynchronous fetch requests for real-time chat responses. Demonstrates full-stack AI integration
                 from model API to deployed UI.
@@ -190,6 +224,38 @@
         <a href="assets/docs/Digitalisering söder om Sahara (Zakaria Bouzada).pdf" target="_blank" class="project-link">
             📄 Read Thesis (PDF)
         </a>
+        <hr style="margin: 2rem 0; border: 0; border-top: 1px solid rgba(173,184,243,0.3);" />
+    <!-- EDGE ML PROJECTS -->
+        <div class="academic-badge"><strong>Course Projects</strong></div>
+        <h3>Edge Computing for ML — Embedded AI on Arduino Nano 33 BLE Sense</h3>
+        <p>
+            Two hands-on edge ML projects deploying neural networks directly onto an Arduino Nano 33 BLE Sense
+            microcontroller — no cloud, no server, inference running entirely on 256KB SRAM and 1MB Flash.
+        </p>
+
+        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(173,184,243,0.3);">
+            <p style="margin: 0 0 0.4rem 0; font-size: 0.8rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.8px;">Project 1 — Audio Classification</p>
+            <p style="margin: 0 0 0.75rem 0; font-size: 0.95rem; color: #374151;">
+                Built a binary keyword spotting system using Edge Impulse and MFCC feature extraction to classify
+                spoken city names ("Helsinki" vs "Tallinn") from voice queries. Collected 88 audio samples across
+                3 speakers, tuned learning rate and data augmentation to reach 85.7% validation accuracy,
+                and deployed the quantized model to the Arduino for real-time inference.
+            </p>
+            <a href="assets/docs/Project1_report.pdf" target="_blank" class="project-link">📄 Read Report</a>
+        </div>
+
+        <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid rgba(173,184,243,0.3);">
+            <p style="margin: 0 0 0.4rem 0; font-size: 0.8rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.8px;">Project 2 — Gesture Classification</p>
+            <p style="margin: 0 0 0.75rem 0; font-size: 0.95rem; color: #374151;">
+                Trained a compact CNN (Rock-Paper-Scissors) in TensorFlow, achieving 91% validation accuracy,
+                then compressed it from ~300KB to ~44KB using int8 quantization and 80% weight pruning to fit
+                within Arduino memory constraints. Integrated an OV7670 camera module for live frame capture
+                and ran inference entirely on-device using TensorFlow Lite Micro.
+            </p>
+            <a href="assets/docs/Project2_report.pdf" target="_blank" class="project-link">📄 Read Report</a>
+        </div>
+
+        <p style="margin-top: 1rem;"><strong>Note:</strong> Written in <strong>English</strong>. Academic course work at Åbo Akademi University.</p>
     </section>
 
     <!-- STACK -->
