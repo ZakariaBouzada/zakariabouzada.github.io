@@ -1241,8 +1241,8 @@ footer {
 .featured-link.nba  { background: linear-gradient(135deg, #f97316, #c2410c); }
 .featured-link.data { background: linear-gradient(135deg, #eacc86, #8c6e31); }
 .featured-link.quickfix {
-    background: linear-gradient(135deg, #0d0f1a 0%, #1a1f35 100%);
-    border: 1px solid rgba(228, 168, 0, 0.3);
+    background: linear-gradient(135deg, #0d0f1a 0%, #1a1f35 100%) !important;
+    border: 1px solid rgba(228, 168, 0, 0.3) !important;
     color: #e4a800;
     font-family: 'Syne', sans-serif;
     letter-spacing: 0.5px;
@@ -1268,14 +1268,14 @@ footer {
     box-shadow: 0 8px 24px rgba(0,0,0,0.3);
 }
 .qf-title-white {
-    color: #ffffff;
-    font-family: 'Syne', sans-serif;
+    color: #ffffff !important;
+    font-family: 'Syne', sans-serif !important;
     font-weight: 800;
 }
 
 .qf-title-gold {
-    color: #e4a800;
-    font-family: 'Syne', sans-serif;
+    color: #e4a800 !important;
+    font-family: 'Syne', sans-serif !important;
     font-weight: 800;
 }
 /* ========================= */
