@@ -1,6 +1,7 @@
 // Store conversation history
 let miniChatHistory = [];
 let fullChatHistory = [];
+let isThinking = false
 
 const SUGGESTED_QUESTIONS = [
     "What projects has he built?",
@@ -45,7 +46,8 @@ async function miniAskLLM() {
     const input = document.getElementById("mini-llm-input");
     const chatBox = document.getElementById("mini-chat-box");
     const question = input.value.trim();
-    if (!question) return;
+    if (!question || isThinking) return;
+    isThinking = true;
 
     // SHOW THE BOX: Change display from 'none' to 'block'
     chatBox.style.display = "block";
@@ -63,6 +65,10 @@ async function miniAskLLM() {
     chatBox.scrollTop = chatBox.scrollHeight;
     input.value = "";
 
+
+
+    input.disabled = true;
+    input.placeholder = "AI is thinking...";
     // Thinking message
     const thinkingMsg = document.createElement("div");
     thinkingMsg.className = "chat-msg thinking";
@@ -71,10 +77,10 @@ async function miniAskLLM() {
     chatBox.scrollTop = chatBox.scrollHeight;
 
     // Create AI message box immediately — text streams into it
-    const aiMsg = document.createElement("div");
-    aiMsg.className = "chat-msg ai";
-    aiMsg.textContent = "";
-    chatBox.appendChild(aiMsg);
+    //const aiMsg = document.createElement("div");
+    //aiMsg.className = "chat-msg ai";
+    //aiMsg.textContent = "";
+    //chatBox.appendChild(aiMsg);
 
     try {
         const response = await fetch("https://llm-search-zakariabouzada-github-io.onrender.com/ask-stream", {
@@ -85,12 +91,16 @@ async function miniAskLLM() {
 
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
+        let aiMsg = null;
 
-        thinkingMsg.remove()
 
         while (true) {
             const { done, value } = await reader.read();
             if (done) break;
+
+            if (thinkingMsg && thinkingMsg.parentNode) {
+                thinkingMsg.remove();
+            }
 
             const chunk = decoder.decode(value);
             const lines = chunk.split("\n");
@@ -104,6 +114,11 @@ async function miniAskLLM() {
                         try {
                             const parsed = JSON.parse(dataStr);
                             if (parsed.token) {
+                                if (!aiMsg) {
+                                    aiMsg = document.createElement("div");
+                                    aiMsg.className = "chat-msg ai";
+                                    chatBox.appendChild(aiMsg);
+                                }
                                 aiMsg.textContent += parsed.token;
                                 chatBox.scrollTop = chatBox.scrollHeight;
                                 await sleep(30)
@@ -113,8 +128,27 @@ async function miniAskLLM() {
                 }
             }
         }
+        if (thinkingMsg && thinkingMsg.parentNode)
+            thinkingMsg.remove();
+        if (!aiMsg){
+            const emptyMsg = document.createElement("div");
+            emptyMsg.className = "chat-msg ai";
+            emptyMsg.textContent = "No response received.";
+            chatBox.appendChild(emptyMsg);
+        }
     } catch (err) {
-        aiMsg.textContent = "Error connecting to AI.";
+        if (thinkingMsg && thinkingMsg.parentNode) thinkingMsg.remove();
+
+        // 2. Create a fresh error bubble (don't use aiMsg here)
+        const errorMsg = document.createElement("div");
+        errorMsg.className = "chat-msg ai";
+        errorMsg.textContent = "Error connecting to AI.";
+        chatBox.appendChild(errorMsg);
+    } finally {
+        isThinking = false;
+        input.disabled = false;
+        input.placeholder = "Ask AI..."
+        input.focus();
     }
 }
 async function askLLM() {
@@ -123,7 +157,8 @@ async function askLLM() {
     const button = document.querySelector(".chat-input button");
 
     const question = inputBox.value.trim();
-    if (!question) return;
+    if (!question || isThinking) return;
+    isThinking = true;
 
     // Remove chips
     const chips = chatBox.querySelector(".chat-chips");
@@ -148,11 +183,15 @@ async function askLLM() {
     chatBox.appendChild(thinkingMsg);
     chatBox.scrollTop = chatBox.scrollHeight;
 
+
+
+    button.disabled = true;
     // Create AI message box immediately — text streams into it
-    const aiMsg = document.createElement("div");
-    aiMsg.className = "chat-msg ai";
-    aiMsg.textContent = "";
-    chatBox.appendChild(aiMsg);
+    //const aiMsg = document.createElement("div");
+    //aiMsg.className = "chat-msg ai";
+    //aiMsg.textContent = "";
+    //chatBox.appendChild(aiMsg);
+
 
     try {
         const response = await fetch("https://llm-search-zakariabouzada-github-io.onrender.com/ask-stream", {
@@ -164,11 +203,16 @@ async function askLLM() {
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
 
-        thinkingMsg.remove()
+        let aiMsg = null; // Use consistent camelCase
 
         while (true) {
             const {done, value} = await reader.read();
             if (done) break;
+
+            // Remove thinking message the moment data starts arriving
+            if (thinkingMsg && thinkingMsg.parentNode) {
+                thinkingMsg.remove();
+            }
 
             const chunk = decoder.decode(value);
             const lines = chunk.split("\n");
@@ -182,19 +226,40 @@ async function askLLM() {
                         try {
                             const parsed = JSON.parse(dataStr);
                             if (parsed.token) {
+                                // Create the bubble ONLY on the first token
+                                if (!aiMsg) {
+                                    aiMsg = document.createElement("div");
+                                    aiMsg.className = "chat-msg ai";
+                                    chatBox.appendChild(aiMsg);
+                                }
                                 aiMsg.textContent += parsed.token;
                                 chatBox.scrollTop = chatBox.scrollHeight;
-                                await sleep(30)
+                                await sleep(30);
                             }
-                        } catch {
-                        }
+                        } catch (e) {}
                     }
                 }
             }
         }
+        if (thinkingMsg && thinkingMsg.parentNode)
+            thinkingMsg.remove();
+        if (!aiMsg){
+            const emptyMsg = document.createElement("div");
+            emptyMsg.className = "chat-msg ai";
+            emptyMsg.textContent = "No response received.";
+            chatBox.appendChild(emptyMsg);
+        }
     } catch (err) {
-        aiMsg.textContent = "Error connecting to AI.";
+        if (thinkingMsg) thinkingMsg.remove();
+        // Create an error message bubble manually since aiMsg might be null
+        const errorMsg = document.createElement("div");
+        errorMsg.className = "chat-msg ai";
+        errorMsg.textContent = "Error connecting to AI.";
+        chatBox.appendChild(errorMsg);
     } finally {
+        isThinking = false;
         button.disabled = false;
+        inputBox.disabled = false;
+        inputBox.focus();
     }
 }
