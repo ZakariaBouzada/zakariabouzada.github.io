@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thesis Overview - Opinionated IaC Bundles</title>
+    <style>
+        :root {
+            --bg-color: #030712;
+            --card-bg: #111827;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --accent-cyan: #06b6d4;
+            --accent-purple: #a855f7;
+            --border-color: #1f2937;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .presentation-container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .slide {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Slide Specific Styles */
+        .title-slide h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .highlight-cyan { color: var(--accent-cyan); }
+        .highlight-purple { color: var(--accent-purple); }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .meta {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 24px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: var(--accent-cyan);
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 20px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+        }
+
+        /* Video Window Layout styling */
+        .video-container {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            background: #000;
+            margin-bottom: 20px;
+            aspect-ratio: 16 / 9;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* External Links Buttons */
+        .links-grid {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .link-btn {
+            display: inline-flex;
+            align-items: center;
+            background: #1f2937;
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        .link-btn:hover {
+            background: var(--accent-cyan);
+            color: #000;
+            border-color: var(--accent-cyan);
+        }
+
+        /* Navigation */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .btn {
+            background: #1f2937;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: #374151;
+        }
+
+        .btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .slide-number {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="presentation-container">
+    <!-- Slide 1 -->
+    <div class="slide active title-slide">
+        <div class="meta">Master's Thesis 2025</div>
+        <h1 style="margin-top: 20px;">Opinionated IaC Bundles:<br>The Future of <span class="highlight-cyan">SME Cloud</span></h1>
+        <p class="subtitle">An investigation into reducing deployment effort and technical barriers for Small and Medium Enterprises through reusable automation framework models.</p>
+        <div class="meta" style="margin-top: auto;">Zakaria Bouzada | Åbo Akademi University</div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide">
+        <h2>The SME "Complexity Gap"</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>The Problem</h3>
+                <ul>
+                    <li>Small & Medium Enterprises lack dedicated DevOps departments.</li>
+                    <li>Standard Cloud consoles present too many options, risking secure setups.</li>
+                    <li>Raw IaC tools require highly specialized engineering talent.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>The Solution</h3>
+                <ul>
+                    <li><strong>Opinionated Frameworks:</strong> Making design decisions ahead of time on behalf of the user.</li>
+                    <li>Pre-packaging security, structure, and networking basics dynamically.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide">
+        <h2>The Multi-Cloud Bundle Framework</h2>
+        <p style="margin-bottom: 20px; color: var(--text-muted);">A progressive abstraction architecture mapping business needs directly to automated multi-cloud environments.</p>
+        <div class="grid" style="grid-template-columns: 1fr 1fr 1fr;">
+            <div class="card">
+                <h3 style="color: var(--accent-purple);">Bundle A</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Static Assets & Frontend</p>
+            </div>
+            <div class="card">
+                <h3 style="color: var(--accent-purple);">Bundle B</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Dynamic Web Apps & Containers</p>
+            </div>
+            <div class="card" style="border-color: var(--accent-cyan); background: rgba(6, 182, 212, 0.05);">
+                <h3>Bundle C (Demo)</h3>
+                <p style="font-size: 0.85rem;">Full-Stack & Cloud Storage</p>
+            </div>
+        </div>
+        <div class="card" style="margin-top: 15px;">
+            <h3 style="color: var(--accent-cyan); font-size: 1.1rem;">Framework Flexibility & Portability</h3>
+            <ul>
+                <li><strong>Customizable Scope:</strong> Bundles A, B, and C represent specific SME models selected for this thesis, but the underlying engine can be tailored to deploy any target architecture — including virtual machines (VMs), database clusters, serverless logic, or security nodes.</li>
+                <li><strong>Provider Agnostic:</strong> Because the blueprints rely on Terraform, every single bundle is fundamentally reusable across <strong>AWS, GCP, Microsoft Azure</strong>, and any other provider infrastructure platform.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="slide">
+        <h2>Project Demonstration & Links</h2>
+
+        <!-- Video Window Player -->
+        <div class="video-container">
+            <iframe width="100%" height="100%"
+                    src="https://www.youtube-nocookie.com/embed/8iTh63psEsk"
+                    title="Thesis Project Demo"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="card">
+            <h3>Developer Profile & Verification</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px;">Access the source architecture, verification data, and professional profiles below:</p>
+
+            <div class="links-grid">
+                <!-- GitHub Repo suoralla linkillä ja yhtenäisellä tyylillä -->
+                <a href="https://github.com/ZakariaBouzada/thesis_bundles" target="_blank" class="link-btn">
+                    <img src="../../assets/images/github_logo.png" alt="GitHub" style="width: 16px; height: 16px; margin-right: 8px; vertical-align: middle;"> GitHub Repository
+                </a>
+
+                <!-- Live Portfolio -->
+                <a href="https://zakariabouzada.github.io/" target="_blank" class="link-btn">
+                    <span style="margin-right: 8px;">🌐</span> Live Portfolio
+                </a>
+
+                <!-- LinkedIn Profile yhtenäisellä tyylillä -->
+                <a href="https://www.linkedin.com/in/zakaria-bouzada-54588622b/" target="_blank" class="link-btn">
+                    <img src="../../assets/images/Linkedin_logo.png" alt="LinkedIn" style="width: 16px; height: 16px; margin-right: 8px; vertical-align: middle;"> LinkedIn Profile
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer / Navigation controls -->
+    <div class="controls">
+        <button class="btn" id="prevBtn" onclick="changeSlide(-1)" disabled>Previous</button>
+        <span class="slide-number" id="slideNum">Slide 1 of 4</span>
+        <button class="btn" id="nextBtn" onclick="changeSlide(1)">Next</button>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const slideNum = document.getElementById('slideNum');
+
+    function changeSlide(direction) {
+        slides[currentSlide].classList.remove('active');
+        currentSlide += direction;
+        slides[currentSlide].classList.add('active');
+
+        // Update buttons
+        prevBtn.disabled = currentSlide === 0;
+        nextBtn.disabled = currentSlide === slides.length - 1;
+
+        // Update text
+        slideNum.textContent = `Slide ${currentSlide + 1} of ${slides.length}`;
+    }
+</script>
+</body>
+</html>
