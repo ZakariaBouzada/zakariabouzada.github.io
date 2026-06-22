@@ -216,7 +216,6 @@
 <body>
 
 <div class="presentation-container">
-    <!-- Slide 1 -->
     <div class="slide active title-slide">
         <div class="meta">Master's Thesis 2025</div>
         <h1 style="margin-top: 20px;">Opinionated IaC Bundles:<br>The Future of <span class="highlight-cyan">SME Cloud</span></h1>
@@ -224,7 +223,6 @@
         <div class="meta" style="margin-top: auto;">Zakaria Bouzada | Åbo Akademi University</div>
     </div>
 
-    <!-- Slide 2 -->
     <div class="slide">
         <h2>The SME "Complexity Gap"</h2>
         <div class="grid">
@@ -246,7 +244,6 @@
         </div>
     </div>
 
-    <!-- Slide 3 -->
     <div class="slide">
         <h2>The Multi-Cloud Bundle Framework</h2>
         <p style="margin-bottom: 20px; color: var(--text-muted);">A progressive abstraction architecture mapping business needs directly to automated multi-cloud environments.</p>
@@ -273,12 +270,13 @@
         </div>
     </div>
 
-    <!-- Slide 4 -->
     <div class="slide">
-        <h2>Project Demonstration & Links</h2>
+        <h2>Technical Demonstration</h2>
+        <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 20px;">
+            This video demonstrates copying the terraform.tfvars file and deploying the terraform package (Bundle C), verifying the infrastructure components inside the Microsoft Azure ecosystem, concluding with a validation of the successful website deployment.
+        </p>
 
-        <!-- Video Window Player -->
-        <div class="video-container">
+        <div class="video-container" style="margin-top: 10px;">
             <iframe width="100%" height="100%"
                     src="https://www.youtube-nocookie.com/embed/8iTh63psEsk"
                     title="Thesis Project Demo"
@@ -288,23 +286,34 @@
                     allowfullscreen>
             </iframe>
         </div>
+    </div>
+
+    <div class="slide">
+        <h2>Evaluation & Verification</h2>
+
+        <div class="card" style="border-left: 4px solid #0078d4; margin-bottom: 25px; background: rgba(0, 120, 212, 0.05);">
+            <h3>Feedback Survey</h3>
+            <p style="font-size: 1rem; margin-bottom: 15px;">
+                Thank you for watching the demonstration! Please take a quick moment to answer this short evaluation form. Your professional expert feedback is incredibly valuable for this research.
+            </p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScj261B5izcKbB9PbfrEtdL54YqYKYateuLV0wiu0716wqfEA/viewform" target="_blank" class="link-btn" style="background: #0078d4; color: white; display: inline-flex; justify-content: center; width: auto; padding: 10px 20px;">
+                Open Evaluation Survey (5 min)
+            </a>
+        </div>
 
         <div class="card">
             <h3>Developer Profile & Verification</h3>
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px;">Access the source architecture, verification data, and professional profiles below:</p>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">Access the source architecture, verification data, and professional profiles below:</p>
 
             <div class="links-grid">
-                <!-- GitHub Repo suoralla linkillä ja yhtenäisellä tyylillä -->
                 <a href="https://github.com/ZakariaBouzada/thesis_bundles" target="_blank" class="link-btn">
                     <img src="../../assets/images/github_logo.png" alt="GitHub" style="width: 16px; height: 16px; margin-right: 8px; vertical-align: middle;"> GitHub Repository
                 </a>
 
-                <!-- Live Portfolio -->
                 <a href="https://zakariabouzada.github.io/" target="_blank" class="link-btn">
                     <span style="margin-right: 8px;">🌐</span> Live Portfolio
                 </a>
 
-                <!-- LinkedIn Profile yhtenäisellä tyylillä -->
                 <a href="https://www.linkedin.com/in/zakaria-bouzada-54588622b/" target="_blank" class="link-btn">
                     <img src="../../assets/images/Linkedin_logo.png" alt="LinkedIn" style="width: 16px; height: 16px; margin-right: 8px; vertical-align: middle;"> LinkedIn Profile
                 </a>
@@ -312,10 +321,9 @@
         </div>
     </div>
 
-    <!-- Footer / Navigation controls -->
     <div class="controls">
         <button class="btn" id="prevBtn" onclick="changeSlide(-1)" disabled>Previous</button>
-        <span class="slide-number" id="slideNum">Slide 1 of 4</span>
+        <span class="slide-number" id="slideNum">Slide 1 of 5</span>
         <button class="btn" id="nextBtn" onclick="changeSlide(1)">Next</button>
     </div>
 </div>
