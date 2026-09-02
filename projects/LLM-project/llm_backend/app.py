@@ -10,7 +10,7 @@ load_dotenv()
 HF_API_KEY = os.getenv("HF_API_KEY")
 
 # 1. Using Llama 3.2 (Ensure you requested access on Hugging Face first!)
-MODEL = "Qwen/Qwen2.5-7B-Instruct:fastest"
+MODEL = "Qwen/Qwen2.5-7B-Instruct"
 # 2. Correct Router URL for Chat
 HF_URL = "https://router.huggingface.co/v1/chat/completions"
 
@@ -194,6 +194,11 @@ def ask_stream():
     def generate():
         full_answer = ""
         with requests.post(HF_URL, headers=headers, json=payload, stream=True, timeout=30) as r:
+            if r.status_code != 200:
+                err_text   = f"HF Error ({r.status_code}):{r.text}"
+                yield f"data: {json.dumps({'token': err_text})}\n\n"
+                return
+
             for line in r.iter_lines():
                 if line:
                     line = line.decode("utf-8")
