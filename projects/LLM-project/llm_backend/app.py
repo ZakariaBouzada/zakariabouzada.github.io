@@ -110,7 +110,7 @@ def ask():
         response = client.chat.completions.create(
             model=MODEL,
             messages=messages,
-            max_tokens=150,
+            max_tokens=400,
             temperature=0.3
         )
 
@@ -144,7 +144,7 @@ def ask_stream():
             stream = client.chat.completions.create(
                 model=MODEL,
                 messages=messages,
-                max_tokens=150,
+                max_tokens=400,
                 temperature=0.3,
                 stream=True
             )
