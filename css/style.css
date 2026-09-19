@@ -41,18 +41,17 @@ body {
 .cursor-dot {
     width: 8px;
     height: 8px;
-    background: rgba(2, 22, 99, 0.5);
+    background: rgba(2, 22, 99, 0.6); /* Use alpha transparency instead of mix-blend-mode */
     border-radius: 50%;
     position: fixed;
     top: 0;
     left: 0;
-    margin-top: -4px;  /* Centers dot vertically (half of 8px height) */
-    margin-left: -4px; /* Centers dot horizontally (half of 8px width) */
+    margin-top: -4px;
+    margin-left: -4px;
     pointer-events: none;
     z-index: 9999;
     will-change: transform;
-    transition: opacity 0.3s ease; /* Retained fade transitions if needed */
-    mix-blend-mode: multiply;
+    transition: opacity 0.3s ease;
 }
 
 /* ========================= */

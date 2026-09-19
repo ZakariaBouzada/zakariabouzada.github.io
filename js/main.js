@@ -105,7 +105,6 @@
 
             if (Math.abs(w) <= 0.08) return;
 
-            ctx.save();
             ctx.rotate(offsetAngle);
             ctx.beginPath();
             ctx.moveTo(0, -h / 2);
@@ -116,7 +115,7 @@
             ctx.closePath();
             ctx.fillStyle = this.color;
             ctx.fill();
-            ctx.restore();
+            ctx.rotate(-offsetAngle);
         }
 
         draw() {
