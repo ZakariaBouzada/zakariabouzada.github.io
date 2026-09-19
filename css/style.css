@@ -44,10 +44,14 @@ body {
     background: rgba(2, 22, 99, 0.5);
     border-radius: 50%;
     position: fixed;
+    top: 0;
+    left: 0;
+    margin-top: -4px;  /* Centers dot vertically (half of 8px height) */
+    margin-left: -4px; /* Centers dot horizontally (half of 8px width) */
     pointer-events: none;
     z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s ease, opacity 0.3s ease;
+    will-change: transform;
+    transition: opacity 0.3s ease; /* Retained fade transitions if needed */
     mix-blend-mode: multiply;
 }
 

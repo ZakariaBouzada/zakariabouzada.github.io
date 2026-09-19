@@ -1,5 +1,5 @@
 /* ============================================================
-   1. Live Bougainvillea Canopy Particle Continuation
+   1. Live Bougainvillea Canopy Particle Continuation (Optimized)
    ============================================================ */
 (function() {
     const canvas = document.getElementById('particle-canvas');
@@ -7,19 +7,20 @@
     const ctx = canvas.getContext('2d');
     const profilePic = document.querySelector('.profile-pic');
 
-    const PETAL_COUNT = 46;
-    const BASE_DRIFT = -0.28; // Gentle persistent drift across the alleyway walkway
+    const PETAL_COUNT = 36; // Slightly reduced for optimal performance
+    const BASE_DRIFT = -0.28;
 
-    // Matched palette directly pulled from the highlights and shadows of your picture's bouquet tree
     const PALETTE = [
-        'rgba(172, 28, 98, ',   /* Vibrant Flower Magenta Core */
-        'rgba(120, 15, 68, ',   /* Deep Twilight Shadow Shade */
-        'rgba(214, 62, 134, ',  /* Sunlit Petal Rim Pink */
-        'rgba(90, 8, 52, ',     /* Dark Ambient Branch Silhouette */
-        'rgba(196, 90, 140, '   /* Warm mid-tone for variety */
+        '172, 28, 98',   /* Vibrant Flower Magenta Core */
+        '120, 15, 68',   /* Deep Twilight Shadow Shade */
+        '214, 62, 134',  /* Sunlit Petal Rim Pink */
+        '90, 8, 52',     /* Dark Ambient Branch Silhouette */
+        '196, 90, 140'   /* Warm mid-tone for variety */
     ];
 
-    let originX = 0, originY = 0; // spawn point near the profile photo, so petals read as coming FROM the tree
+    let originX = 0, originY = 0;
+    let isVisible = true;
+    let animId = null;
 
     function resizeCanvas() {
         canvas.width = canvas.parentElement.offsetWidth;
@@ -39,7 +40,6 @@
         originY = (picBox.top - canvasBox.top) + picBox.height * 0.15;
     }
 
-    // Slow, layered sine waves so the wind reads as gusting rather than a constant mechanical drift
     let time = 0;
     function windGust() {
         return Math.sin(time * 0.0006) * 0.5 + Math.sin(time * 0.00023 + 1.5) * 0.3;
@@ -54,11 +54,9 @@
             const spawnFromTree = Math.random() < 0.55;
 
             if (isInitialLoad) {
-                // Distribute across viewport on first frame so the header isn't empty on load
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
             } else if (spawnFromTree) {
-                // Most respawns originate near the photo's canopy edge, not the top of the header
                 this.x = originX + (Math.random() - 0.3) * 90;
                 this.y = originY + (Math.random() - 0.5) * 70;
             } else {
@@ -70,14 +68,13 @@
             this.speedY = Math.random() * 0.6 + 0.35;
             this.speedX = (Math.random() * 0.4 - 0.2) + BASE_DRIFT;
 
-            this.colorBase = PALETTE[Math.floor(Math.random() * PALETTE.length)];
-            this.opacity = Math.random() * 0.4 + 0.45;
+            // Pre-compute RGBA color string to avoid garbage collection thrashing in draw loop
+            const rgb = PALETTE[Math.floor(Math.random() * PALETTE.length)];
+            this.opacity = (Math.random() * 0.35 + 0.45).toFixed(2);
+            this.color = `rgba(${rgb}, ${this.opacity})`;
 
-            // Depth cue: smaller petals sit "farther back" — softer, dimmer, blurred
-            this.depth = this.size / 12; // roughly 0.33 - 0.9
-            this.blur = (1 - this.depth) * 2.2;
+            this.depth = this.size / 12;
 
-            // Multi-axis tumble instead of a single horizontal squash, so petals read as 3D, not flat paper
             this.flip = Math.random() * Math.PI;
             this.flipSpeed = Math.random() * 0.02 + 0.008;
             this.tilt = Math.random() * Math.PI;
@@ -87,7 +84,6 @@
             this.swaySpeed = Math.random() * 0.015 + 0.005;
             this.swayOffset = Math.random() * Math.PI * 2;
 
-            // Most are lone bracts; some are 3-bract sprigs, like real bougainvillea clusters
             this.cluster = Math.random() < 0.3 ? 3 : 1;
         }
 
@@ -98,7 +94,6 @@
             this.tilt += this.tiltSpeed;
             this.angle += this.spin;
 
-            // Recycle object if it exits horizontal coordinates or passes past header limits
             if (this.y > canvas.height + 15 || this.x < -30 || this.x > canvas.width + 30) {
                 this.init(false);
             }
@@ -108,20 +103,19 @@
             const w = this.size * scale * Math.sin(this.flip);
             const h = this.size * scale * (0.85 + 0.15 * Math.cos(this.tilt));
 
+            if (Math.abs(w) <= 0.08) return;
+
             ctx.save();
             ctx.rotate(offsetAngle);
-            if (Math.abs(w) > 0.08) {
-                ctx.beginPath();
-                // Papery, tapered bract shape — bougainvillea bracts come to a point, unlike round petals
-                ctx.moveTo(0, -h / 2);
-                ctx.quadraticCurveTo(w, -h * 0.15, w * 0.7, h * 0.35);
-                ctx.quadraticCurveTo(w * 0.2, h / 2, 0, h / 2);
-                ctx.quadraticCurveTo(-w * 0.2, h / 2, -w * 0.7, h * 0.35);
-                ctx.quadraticCurveTo(-w, -h * 0.15, 0, -h / 2);
-                ctx.closePath();
-                ctx.fillStyle = this.colorBase + this.opacity + ')';
-                ctx.fill();
-            }
+            ctx.beginPath();
+            ctx.moveTo(0, -h / 2);
+            ctx.quadraticCurveTo(w, -h * 0.15, w * 0.7, h * 0.35);
+            ctx.quadraticCurveTo(w * 0.2, h / 2, 0, h / 2);
+            ctx.quadraticCurveTo(-w * 0.2, h / 2, -w * 0.7, h * 0.35);
+            ctx.quadraticCurveTo(-w, -h * 0.15, 0, -h / 2);
+            ctx.closePath();
+            ctx.fillStyle = this.color;
+            ctx.fill();
             ctx.restore();
         }
 
@@ -129,7 +123,6 @@
             ctx.save();
             ctx.translate(this.x, this.y);
             ctx.rotate(this.angle);
-            ctx.filter = this.blur > 0.15 ? `blur(${this.blur.toFixed(1)}px)` : 'none';
 
             if (this.cluster === 3) {
                 this.drawBract(0, 1);
@@ -142,6 +135,7 @@
             ctx.restore();
         }
     }
+    resizeCanvas();
 
     const petals = [];
     for (let i = 0; i < PETAL_COUNT; i++) {
@@ -149,22 +143,39 @@
     }
 
     function animate() {
+        if (!isVisible) return;
         time += 16;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         const gust = windGust();
 
-        petals.forEach(petal => {
-            petal.update(gust);
-            petal.draw();
-        });
+        for (let i = 0; i < petals.length; i++) {
+            petals[i].update(gust);
+            petals[i].draw();
+        }
 
-        requestAnimationFrame(animate);
+        animId = requestAnimationFrame(animate);
     }
+
+    // Pause canvas execution when header is scrolled out of viewport
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            isVisible = entry.isIntersecting;
+            if (isVisible) {
+                if (!animId) animate();
+            } else {
+                if (animId) {
+                    cancelAnimationFrame(animId);
+                    animId = null;
+                }
+            }
+        });
+    }, { threshold: 0.05 });
+
+    observer.observe(canvas);
 
     window.addEventListener('resize', resizeCanvas);
     window.addEventListener('load', updateOrigin);
-    resizeCanvas();
-    animate();
+
 })();
 
 /* ============================================
@@ -250,27 +261,43 @@
 })();
 
 /* ============================================
-5. CURSOR DOT TRAIL
+5. CURSOR DOT TRAIL (GPU Accelerated)
 ============================================ */
 (function() {
     const dot = document.getElementById('cursorDot');
-    if (!dot) return;
+    if (!dot || 'ontouchstart' in window) {
+        if (dot) dot.style.display = 'none';
+        return;
+    }
+
     let mouseX = 0, mouseY = 0;
     let dotX = 0, dotY = 0;
+    let isAnimating = false;
 
     document.addEventListener('mousemove', e => {
         mouseX = e.clientX;
         mouseY = e.clientY;
+        if (!isAnimating) {
+            isAnimating = true;
+            requestAnimationFrame(animate);
+        }
     });
 
     function animate() {
-        dotX += (mouseX - dotX) * 0.15;
-        dotY += (mouseY - dotY) * 0.15;
-        dot.style.left = dotX + 'px';
-        dot.style.top  = dotY + 'px';
-        requestAnimationFrame(animate);
-    }
-    animate();
+        const dx = mouseX - dotX;
+        const dy = mouseY - dotY;
 
-    if ('ontouchstart' in window) dot.style.display = 'none';
+        dotX += dx * 0.15;
+        dotY += dy * 0.15;
+
+        // Use GPU layer transform instead of layout-triggering left/top
+        dot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0)`;
+
+        // Pause animation frame loop when dot reaches cursor target
+        if (Math.abs(dx) < 0.1 && Math.abs(dy) < 0.1) {
+            isAnimating = false;
+        } else {
+            requestAnimationFrame(animate);
+        }
+    }
 })();
